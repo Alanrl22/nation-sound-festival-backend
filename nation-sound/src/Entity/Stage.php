@@ -27,6 +27,11 @@ class Stage
      */
     private $coordinate;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Category;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +57,18 @@ class Stage
     public function setCoordinate(string $coordinate): self
     {
         $this->coordinate = $coordinate;
+
+        return $this;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->Category;
+    }
+
+    public function setCategory(string $Category): self
+    {
+        $this->Category = $Category;
 
         return $this;
     }
