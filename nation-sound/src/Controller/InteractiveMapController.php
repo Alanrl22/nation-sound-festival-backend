@@ -9,11 +9,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class InteractiveMapController extends AbstractController
 {
     /**
-     * @Route("/interactive-map", name="interactivemap")
+     * @Route("/interactive-map", name="interactive_map")
      */
     public function index(): Response
     {
-        return $this->render('interactivemap/index.html.twig', [
+        return $this->render('interactive_map/index.html.twig', [
             'controller_name' => 'InteractiveMapController',
         ]);
     }

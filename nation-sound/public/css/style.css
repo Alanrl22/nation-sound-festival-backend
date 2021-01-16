@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,700&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+}
+
+#logoSite {
+    max-height: 2rem;
+}
+
+header {
+    display: flex;
+    background: #FF8E4E;
+    padding: 1rem 1.4rem;
+}
+
+h1 {
+    text-align: center;
+}
