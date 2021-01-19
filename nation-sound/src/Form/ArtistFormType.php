@@ -17,13 +17,31 @@ class ArtistFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('description', TextareaType::class)
-            ->add('image', TextType::class)
-            ->add('bigArtist', CheckboxType::class)
-            ->add('type', ChoiceType::class)
-            ->add('Enregister', SubmitType::class)
-        ;
+            ->add('name', TextType::class,     [
+                'label' => 'Nom de l\'artiste'
+            ])
+            ->add('type', ChoiceType::class,     [
+                'label' => 'Genre musical'
+            ])
+            ->add('description', TextareaType::class,     [
+                'label' => 'Description',
+                'attr' => [
+                    'rows' => 10,
+                ],
+            ])
+            ->add('image', TextType::class,     [
+                'label' => 'Image'
+            ])
+            ->add('bigArtist', CheckboxType::class,     [
+                'label' => 'Tête d\'affiche ?',
+                'label_attr' => [
+                    'class' => 'inline',
+                ],
+                'attr' => [
+                    'class' => 'inline',
+                ],
+            ])
+            ->add('Enregister', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

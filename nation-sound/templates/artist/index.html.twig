@@ -3,11 +3,9 @@
 {% block title %}Hello ArtistController!{% endblock %}
 
 {% block body %}
-<div class="artist">
+<div class=" container artist">
     <h1>Ajouter un artiste</h1>
 
-    {{ form_start(artistForm) }}
-    {{ form_end(artistForm) }}
-
+    {{ form(artistForm) }}
 </div>
 {% endblock %}
