@@ -83,7 +83,7 @@ class Artist
         return $this;
     }
 
-    public function getBigArtist(): ?bool
+    public function isBigArtist(): ?bool
     {
         return $this->bigArtist;
     }
