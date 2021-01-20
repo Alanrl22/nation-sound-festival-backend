@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FaqRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,16 @@ class Faq
      * @ORM\Column(type="boolean")
      */
     private $active;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=festival::class, inversedBy="faqs")
+     */
+    private $festival;
+
+    public function __construct()
+    {
+        $this->festival = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +81,30 @@ class Faq
     public function setActive(bool $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|festival[]
+     */
+    public function getFestival(): Collection
+    {
+        return $this->festival;
+    }
+
+    public function addFestival(festival $festival): self
+    {
+        if (!$this->festival->contains($festival)) {
+            $this->festival[] = $festival;
+        }
+
+        return $this;
+    }
+
+    public function removeFestival(festival $festival): self
+    {
+        $this->festival->removeElement($festival);
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MeetingRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,16 @@ class Meeting
      * @ORM\Column(type="date")
      */
     private $day;
+
+    /**
+     * @ORM\OneToMany(targetEntity=artist::class, mappedBy="meeting")
+     */
+    private $artist;
+
+    public function __construct()
+    {
+        $this->artist = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +98,36 @@ class Meeting
     public function setDay(\DateTimeInterface $day): self
     {
         $this->day = $day;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|artist[]
+     */
+    public function getArtist(): Collection
+    {
+        return $this->artist;
+    }
+
+    public function addArtist(artist $artist): self
+    {
+        if (!$this->artist->contains($artist)) {
+            $this->artist[] = $artist;
+            $artist->setMeeting($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArtist(artist $artist): self
+    {
+        if ($this->artist->removeElement($artist)) {
+            // set the owning side to null (unless already changed)
+            if ($artist->getMeeting() === $this) {
+                $artist->setMeeting(null);
+            }
+        }
 
         return $this;
     }

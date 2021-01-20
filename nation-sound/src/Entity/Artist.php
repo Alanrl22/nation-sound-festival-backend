@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArtistRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,30 @@ class Artist
      * @ORM\Column(type="string", length=255)
      */
     private $type;
+
+    /**
+     * @ORM\OneToMany(targetEntity=concert::class, mappedBy="artist")
+     */
+    private $concert;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Meeting::class, inversedBy="artist")
+     */
+    private $meeting;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=festival::class, inversedBy="artists")
+     */
+    private $festival;
+
+    public function __construct()
+    {
+        $this->concert = new ArrayCollection();
+        $this->festival = new ArrayCollection();
+    }
+
+
+
 
     public function getId(): ?int
     {
@@ -106,4 +132,71 @@ class Artist
 
         return $this;
     }
+
+    /**
+     * @return Collection|concert[]
+     */
+    public function getConcert(): Collection
+    {
+        return $this->concert;
+    }
+
+    public function addConcert(concert $concert): self
+    {
+        if (!$this->concert->contains($concert)) {
+            $this->concert[] = $concert;
+            $concert->setArtist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConcert(concert $concert): self
+    {
+        if ($this->concert->removeElement($concert)) {
+            // set the owning side to null (unless already changed)
+            if ($concert->getArtist() === $this) {
+                $concert->setArtist(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getMeeting(): ?Meeting
+    {
+        return $this->meeting;
+    }
+
+    public function setMeeting(?Meeting $meeting): self
+    {
+        $this->meeting = $meeting;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|festival[]
+     */
+    public function getFestival(): Collection
+    {
+        return $this->festival;
+    }
+
+    public function addFestival(festival $festival): self
+    {
+        if (!$this->festival->contains($festival)) {
+            $this->festival[] = $festival;
+        }
+
+        return $this;
+    }
+
+    public function removeFestival(festival $festival): self
+    {
+        $this->festival->removeElement($festival);
+
+        return $this;
+    }
+
 }

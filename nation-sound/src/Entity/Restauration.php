@@ -42,6 +42,11 @@ class Restauration
      */
     private $company;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=festival::class, inversedBy="restaurations")
+     */
+    private $festival;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Restauration
     public function setCompany(string $company): self
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    public function getFestival(): ?festival
+    {
+        return $this->festival;
+    }
+
+    public function setFestival(?festival $festival): self
+    {
+        $this->festival = $festival;
 
         return $this;
     }

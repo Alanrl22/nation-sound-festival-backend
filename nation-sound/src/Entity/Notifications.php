@@ -37,6 +37,11 @@ class Notifications
      */
     private $endDate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=festival::class, inversedBy="notifications")
+     */
+    private $festival;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class Notifications
     public function setEndDate(\DateTimeInterface $endDate): self
     {
         $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    public function getFestival(): ?festival
+    {
+        return $this->festival;
+    }
+
+    public function setFestival(?festival $festival): self
+    {
+        $this->festival = $festival;
 
         return $this;
     }

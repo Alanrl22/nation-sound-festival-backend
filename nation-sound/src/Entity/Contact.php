@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ContactRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,16 @@ class Contact
      * @ORM\Column(type="string", length=255)
      */
     private $description;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=festival::class, inversedBy="contacts")
+     */
+    private $festival;
+
+    public function __construct()
+    {
+        $this->festival = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +98,30 @@ class Contact
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|festival[]
+     */
+    public function getFestival(): Collection
+    {
+        return $this->festival;
+    }
+
+    public function addFestival(festival $festival): self
+    {
+        if (!$this->festival->contains($festival)) {
+            $this->festival[] = $festival;
+        }
+
+        return $this;
+    }
+
+    public function removeFestival(festival $festival): self
+    {
+        $this->festival->removeElement($festival);
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PartnersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +28,16 @@ class Partners
      * @ORM\Column(type="string", length=255)
      */
     private $logo;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=festival::class, inversedBy="partners")
+     */
+    private $festival;
+
+    public function __construct()
+    {
+        $this->festival = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -52,6 +64,30 @@ class Partners
     public function setLogo(string $logo): self
     {
         $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|festival[]
+     */
+    public function getFestival(): Collection
+    {
+        return $this->festival;
+    }
+
+    public function addFestival(festival $festival): self
+    {
+        if (!$this->festival->contains($festival)) {
+            $this->festival[] = $festival;
+        }
+
+        return $this;
+    }
+
+    public function removeFestival(festival $festival): self
+    {
+        $this->festival->removeElement($festival);
 
         return $this;
     }
