@@ -45,7 +45,7 @@ class Artist
     private $type;
 
     /**
-     * @ORM\OneToMany(targetEntity=concert::class, mappedBy="artist")
+     * @ORM\OneToMany(targetEntity=Concert::class, mappedBy="artist")
      */
     private $concert;
 
@@ -55,9 +55,14 @@ class Artist
     private $meeting;
 
     /**
-     * @ORM\ManyToMany(targetEntity=festival::class, inversedBy="artists")
+     * @ORM\ManyToMany(targetEntity=Festival::class, inversedBy="artists")
      */
     private $festival;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=MusicStyle::class, inversedBy="artist")
+     */
+    private $musicStyle;
 
     public function __construct()
     {
@@ -195,6 +200,18 @@ class Artist
     public function removeFestival(festival $festival): self
     {
         $this->festival->removeElement($festival);
+
+        return $this;
+    }
+
+    public function getMusicStyle(): ?MusicStyle
+    {
+        return $this->musicStyle;
+    }
+
+    public function setMusicStyle(?MusicStyle $musicStyle): self
+    {
+        $this->musicStyle = $musicStyle;
 
         return $this;
     }

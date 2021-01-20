@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Artist;
+use App\Entity\MusicStyle;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -20,7 +22,8 @@ class ArtistFormType extends AbstractType
             ->add('name', TextType::class,     [
                 'label' => 'Nom de l\'artiste'
             ])
-            ->add('type', ChoiceType::class,     [
+            ->add('musicStyle', EntityType::class,     [
+                'class' => MusicStyle::class,
                 'label' => 'Genre musical'
             ])
             ->add('description', TextareaType::class,     [
