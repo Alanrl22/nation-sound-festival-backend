@@ -40,11 +40,6 @@ class Artist
     private $bigArtist;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $type;
-
-    /**
      * @ORM\OneToMany(targetEntity=Concert::class, mappedBy="artist")
      */
     private $concert;

@@ -40,7 +40,7 @@ class Concert
     private $artist;
 
     /**
-     * @ORM\ManyToOne(targetEntity=stage::class, inversedBy="concerts")
+     * @ORM\ManyToOne(targetEntity=Stage::class, inversedBy="concerts")
      */
     private $stage;
 
