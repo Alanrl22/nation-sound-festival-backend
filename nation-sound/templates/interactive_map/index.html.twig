@@ -1,6 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello InteractiveMapController!{% endblock %}
+{% block title %}Les points d'intérêt{% endblock %}
 
 {% block body %}
+<div class="container poi">
+    <h1>Ajouter un point d'intérêt</h1>
+
+
+    {{ form(stageForm) }}
+
+    <ul>
+        {% for stage in stages %}
+        <li>
+            <a>
+                <p>{{ stage.title }}</p>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}
