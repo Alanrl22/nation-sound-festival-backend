@@ -9,14 +9,19 @@
 
     {{ form(stageForm) }}
 
-    <ul>
-        {% for stage in stages %}
-        <li>
-            <a>
-                <p>{{ stage.title }}</p>
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
+
+    <h2>Liste des points d'intérêt</h2>
+
+    <div class="list">
+        <ul>
+            {% for stage in stages %}
+            <li>
+                <a>
+                    <p>{{ stage.title }}</p>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock %}
