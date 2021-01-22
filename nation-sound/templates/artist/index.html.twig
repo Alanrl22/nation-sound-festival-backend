@@ -8,4 +8,13 @@
 
     {{ form(artistForm) }}
 </div>
+
+<div>
+   
+ {% for artist in artists %}
+        <p><a href="{{ path('artist_edit', {'id':artist.id}) }}">{{ artist.name }}</a></p>
+    {% endfor %}
+
+</div>
+
 {% endblock %}
