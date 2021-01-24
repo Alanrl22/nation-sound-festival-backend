@@ -17,7 +17,7 @@ body {
 }
 
 .container form {
-    width: 100%;
+  width: 100%;
 }
 
 #logoSite {
@@ -81,4 +81,30 @@ button[type="submit"] {
   margin: auto;
   /* min-width: 20rem; */
   padding: 0.6em 4em;
+}
+
+.list {
+  width: 100%;
+}
+
+.list ul {
+  padding: 0;
+  width: 100%;
+}
+
+.list li {
+  list-style: none;
+  padding: 1em;
+}
+
+.list li:nth-child(odd) {
+  background: #fcf6bd;
+}
+
+.list li:nth-child(even) {
+  background: white;
+}
+
+.list p {
+  margin: 0;
 }
