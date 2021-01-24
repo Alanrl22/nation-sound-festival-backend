@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Artist;
 use App\Form\ArtistFormType;
 use App\Repository\ArtistRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,34 +19,32 @@ class ArtistController extends AbstractController
      */
     public function index(Request $request): Response
     {
-       
 
         // Enregistrer un artiste
         $artist = new Artist();
 
         $artistForm = $this->createForm(ArtistFormType::class, $artist);
-       
+
         $artistForm->handleRequest($request);
 
-        if($artistForm->isSubmitted()){
+        if ($artistForm->isSubmitted()) {
 
-            if($artistForm->isValid()){
-                
-                $em= $this->getDoctrine()->getManager();
+            if ($artistForm->isValid()) {
 
-                $em->persist($artist); 
-    
+                $em = $this->getDoctrine()->getManager();
+
+                $em->persist($artist);
+
                 $em->flush();
 
                 echo "Artiste enregistré";
-            } else{
+            } else {
                 echo "l'Artiste n'a pas été enregistré";
             }
-
         }
 
-         // Afficher une liste d'artistes
-         $artists = $this->getDoctrine()->getRepository(Artist::class)->findAll();
+        // Afficher une liste d'artistes
+        $artists = $this->getDoctrine()->getRepository(Artist::class)->findAll();
 
 
         return $this->render('artist/index.html.twig', [
@@ -55,12 +54,50 @@ class ArtistController extends AbstractController
     }
 
 
+    // Modifier un Artiste 
+
     /**
+     * @Route("artist/{id}/edit", name="artist_edit")
+     * @param Artist $artist
+     * @param Request $request
      * @return Response
-     * 
-     * @Route("/edit/{id}", name="artist_edit")
      */
-    public function editArtist(Request $request, Artist $artist){
+    public function editArtist($id, Request $request, EntityManagerInterface $entityManager)
+    {
+
+        $artist = $entityManager->getRepository(Artist::class)->find($id);
+        $artistForm = $this->createForm(ArtistFormType::class, $artist);
+        $artistForm->handleRequest($request);
+        if ($artistForm->isSubmitted() && $artistForm->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+            return $this->redirectToRoute('artist');
+        }
+        return $this->render("artist/edit.html.twig", [
+            'artistForm' => $artistForm->createView(),
+        ]);
+    }
+
+    // Supprimer un Artiste 
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
+     * @return Response
+     * @Route("/edit/{id}", name="artist_edit")
+     
+    public function editArtist($id, Request $request, EntityManagerInterface $entityManager) { 
+        
+        $artist = $entityManager->getRepository(Artist::class)->find($id);
 
         $artistForm = $this->createForm(ArtistFormType::class, $artist);
        
@@ -70,9 +107,9 @@ class ArtistController extends AbstractController
 
             if($artistForm->isValid()){
                 
-                $em= $this->getDoctrine()->getManager();
+                $entityManager= $this->getDoctrine()->getManager();
     
-                $em->flush();
+                $entityManager->flush();
 
                 echo "Artiste modifié";
             } else{
@@ -80,16 +117,6 @@ class ArtistController extends AbstractController
             }
 
         }
-
-         // Afficher une liste d'artistes
-         $artists = $this->getDoctrine()->getRepository(Artist::class)->findAll();
-
-
-        return $this->render('artist/index.html.twig', [
-            'artistForm' => $artistForm->createView(),
-            'artists' => $artists
-        ]);
-
-
     }
+    */
 }
