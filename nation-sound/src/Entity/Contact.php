@@ -40,7 +40,7 @@ class Contact
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity=festival::class, inversedBy="contacts")
+     * @ORM\ManyToMany(targetEntity=Festival::class, inversedBy="contacts")
      */
     private $festival;
 
