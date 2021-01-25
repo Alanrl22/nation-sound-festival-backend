@@ -114,6 +114,11 @@ class Festival
      */
     private $wcs;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $endDate;
+
     public function __construct()
     {
         $this->artists = new ArrayCollection();
@@ -506,6 +511,18 @@ class Festival
                 $wc->setFestival(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEndDate(): ?\DateTimeInterface
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate(?\DateTimeInterface $endDate): self
+    {
+        $this->endDate = $endDate;
 
         return $this;
     }

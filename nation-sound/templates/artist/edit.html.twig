@@ -6,6 +6,14 @@
 
     <h1>Editer un artiste </h1>
 
+    {{ form_start(artistForm) }}
+
     {{ form(artistForm) }}
     
+    
+      <button type="submit" value="Editer" >
+        Editer
+    </button>
+    {{ form_end(artistForm) }}
+
 {% endblock %}
