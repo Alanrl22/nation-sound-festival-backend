@@ -40,7 +40,7 @@ class Meeting
     private $day;
 
     /**
-     * @ORM\OneToMany(targetEntity=artist::class, mappedBy="meeting")
+     * @ORM\OneToMany(targetEntity=Artist::class, mappedBy="meeting")
      */
     private $artist;
 

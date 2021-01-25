@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContactController!{% endblock %}
+
+{% block body %}
+<div class="container meeting">
+    <h1>Ajouter un meeting</h1>
+
+    {{ form(meetingForm) }}
+</div>
+
+<div>
+   
+ {% for meeting in meetings %}
+        <p><a href="{{ path('meeting_edit', {'id':meeting.id}) }}">{{ meeting.name }}</a></p>
+    {% endfor %}
+</div>
+
+{% endblock %}
