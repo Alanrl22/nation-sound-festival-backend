@@ -8,6 +8,7 @@ use App\Repository\ArtistRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -80,43 +81,19 @@ class ArtistController extends AbstractController
 
     // Supprimer un Artiste 
 
+    /**
+     * @Route("/artist/{id}/delete", name="artist_delete")
+     * @param Artist $artist
+     * @return RedirectResponse
+     */
+    public function deleteArtist($id, Request $request, EntityManagerInterface $entityManager)
+    {
 
-
-
-
-
-
-
-
-
-
-
-    /*
-     * @return Response
-     * @Route("/edit/{id}", name="artist_edit")
-     
-    public function editArtist($id, Request $request, EntityManagerInterface $entityManager) { 
-        
         $artist = $entityManager->getRepository(Artist::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($artist);
+        $entityManager->flush();
 
-        $artistForm = $this->createForm(ArtistFormType::class, $artist);
-       
-        $artistForm->handleRequest($request);
-
-        if($artistForm->isSubmitted()){
-
-            if($artistForm->isValid()){
-                
-                $entityManager= $this->getDoctrine()->getManager();
-    
-                $entityManager->flush();
-
-                echo "Artiste modifié";
-            } else{
-                echo "l'Artiste n'a pas été enregistré";
-            }
-
-        }
+        return $this->redirectToRoute("artist");
     }
-    */
 }

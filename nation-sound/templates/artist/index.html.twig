@@ -13,6 +13,7 @@
    
  {% for artist in artists %}
         <p><a href="{{ path('artist_edit', {'id':artist.id}) }}">{{ artist.name }}</a></p>
+         <a href="{{ path('artist_delete', {"id": artist.id}) }}" class="btn btn-sm btn-outline-secondary" onclick="return confirm('Attention ce ci va supprimer l\'artist selectionner')">Delete</a>
     {% endfor %}
 </div>
 
