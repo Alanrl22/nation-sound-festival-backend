@@ -30,11 +30,20 @@ header {
   padding: 1rem 1.4rem;
 }
 
-h1 {
+h1,
+h2 {
   border-bottom: 3px solid #ff8e4e;
   margin-bottom: 2em;
-  /* text-align: center; */
   width: 100%;
+}
+
+.success-message {
+  background-color: #d0f4de;
+  border: 1px solid green;
+  margin: -2em auto 2em;
+  text-align: center;
+  padding: 0.5em;
+  width: 98%;
 }
 
 label {
@@ -50,7 +59,7 @@ label {
 input:not([type="checkbox"]),
 textarea,
 select {
-  width: 94%;
+  width: 98%;
 }
 
 select {
@@ -83,7 +92,10 @@ button[type="submit"] {
   padding: 0.6em 4em;
 }
 
+/* LISTE DES ELEMENTS ENREGISTRES */
+
 .list {
+  margin-top: 2em;
   width: 100%;
 }
 
@@ -94,7 +106,18 @@ button[type="submit"] {
 
 .list li {
   list-style: none;
+}
+
+.list li a {
+  color: black;
+  display: flex;
+  justify-content: space-between;
   padding: 1em;
+  text-decoration: none;
+}
+
+.list li a img {
+  height: 1.5em;
 }
 
 .list li:nth-child(odd) {

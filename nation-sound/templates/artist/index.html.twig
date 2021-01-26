@@ -6,14 +6,26 @@
 <div class="container artist">
     <h1>Ajouter un artiste</h1>
 
+    {% for msg in app.session.flashBag.get('success') %}
+    <div class="success-message">
+        {{msg}}
+    </div>
+    {% endfor %}
+
+
     {{ form(artistForm) }}
+
+    <div class="list">
+        <h2>Liste des artistes</h2>
+        <ul>
+            {% for artist in artists %}
+            <li>
+                <p><a href="{{ path('artist_edit', {'id':artist.id}) }}">{{ artist.name }}</a></p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 
-<div>
-   
- {% for artist in artists %}
-        <p><a href="{{ path('artist_edit', {'id':artist.id}) }}">{{ artist.name }}</a></p>
-    {% endfor %}
-</div>
 
 {% endblock %}
