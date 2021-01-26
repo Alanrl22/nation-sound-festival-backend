@@ -44,7 +44,7 @@ class ArtistFormType extends AbstractType
                     'class' => 'inline',
                 ],
             ])
-            ->add('Enregister', SubmitType::class);
+            ->add('Enregistrer', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

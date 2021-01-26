@@ -28,6 +28,9 @@
           <p><strong>{{ artist.name }}</strong> / {{ artist.description }}</p>
           <img src="{{ asset('images/edit.svg') }}">
         </a>
+        <a href="{{ path('artist_delete', {'id': artist.id}) }}" class="delete"
+          onclick="return confirm('Attention ceci va supprimer l\'artiste selectionné')"><button><img
+              src="{{asset('images/delete.svg')}}" alt=""></button></a>
       </li>
       {% endfor %}
     </ul>

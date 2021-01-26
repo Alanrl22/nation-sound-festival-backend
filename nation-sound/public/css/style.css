@@ -20,12 +20,13 @@ body {
   width: 100%;
 }
 
-#logoSite {
+#logoSite, #homeSite {
   max-height: 2rem;
 }
 
 header {
   display: flex;
+  justify-content: space-between;
   background: #ff8e4e;
   padding: 1rem 1.4rem;
 }
@@ -78,7 +79,7 @@ input[type="checkbox"] {
   margin-left: 1.5em;
 }
 
-button[type="submit"] {
+button[type="submit"], .big_btn {
   background: #d0f4de;
   border-radius: 50px;
   border: 1px solid black;
@@ -105,19 +106,40 @@ button[type="submit"] {
 }
 
 .list li {
+  display: flex;
+  justify-content: space-between;
   list-style: none;
+  padding: 0 0.4em;
 }
 
 .list li a {
+  align-items: center;
   color: black;
   display: flex;
   justify-content: space-between;
-  padding: 1em;
   text-decoration: none;
+  width: 100%;
 }
+
 
 .list li a img {
   height: 1.5em;
+  padding: 0 0.4em;
+}
+
+.list button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.list .delete {
+  max-width: 2em;
+  padding-right: 0.8em;
+}
+
+.list .delete img {
+  height: 1.6em;
 }
 
 .list li:nth-child(odd) {
@@ -129,5 +151,5 @@ button[type="submit"] {
 }
 
 .list p {
-  margin: 0;
+  margin: 0.4em 0;
 }
