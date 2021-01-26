@@ -38,4 +38,25 @@ class ArtistController extends AbstractController
             'artistForm' => $artistForm->createView(),
         ]);
     }
+
+    /**
+     * @Route("artist/{id}/new", name="artist_new")
+     * @param Artist $artist
+     * @param Request $request
+     * @return Response
+     */
+    public function new(Artist $artist, Request $request): Response
+    {
+        $form = $this->createForm(ArtistFormType::class, $artist);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirectToRoute('home');
+        }
+        return $this->render("artist/new.html.twig", [
+            "form" => $form->createView()
+        ]);
+    }
 }

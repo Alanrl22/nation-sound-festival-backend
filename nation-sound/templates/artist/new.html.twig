@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Add artist {% endblock %}
+
+{% block body %}
+
+<h1>Add artist<h1>
+
+    {{ form_start(form) }}
+
+    {{ include('artist/_form.html.twig')}}
+    <button class="btn btn-primary">
+        Ajouter
+        </button>
+    {{ form_end(form) }}
+{% endblock %}
+
