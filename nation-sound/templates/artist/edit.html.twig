@@ -3,17 +3,35 @@
 {% block title %} Modifier un artiste {% endblock %}
 
 {% block body %}
+<div class="container artist">
 
-    <h1>Editer un artiste </h1>
+  <h1>Editer un artiste </h1>
 
-    {{ form_start(artistForm) }}
+  {% for msg in app.session.flashBag.get('success') %}
+  <div class="success-message">
+    {{msg}}
+  </div>
+  {% endfor %}
 
-    {{ form(artistForm) }}
-    
-    
-      <button type="submit" value="Editer" >
-        Editer
-    </button>
-    {{ form_end(artistForm) }}
+  {{ form_start(artistForm) }}
 
+  {{ form(artistForm) }}
+
+  {{ form_end(artistForm) }}
+
+  <div class="list">
+    <h2>Liste des artistes</h2>
+    <ul>
+      {% for artist in artists %}
+      <li>
+        <a href="{{ path('artist_edit', {'id':artist.id}) }}">
+          <p><strong>{{ artist.name }}</strong> / {{ artist.description }}</p>
+          <img src="{{ asset('images/edit.svg') }}">
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+</div>
 {% endblock %}

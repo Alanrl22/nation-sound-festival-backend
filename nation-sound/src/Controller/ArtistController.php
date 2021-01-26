@@ -28,6 +28,8 @@ class ArtistController extends AbstractController
 
         $artistForm->handleRequest($request);
 
+        $msg = "";
+
         if ($artistForm->isSubmitted()) {
 
             if ($artistForm->isValid()) {
@@ -38,7 +40,13 @@ class ArtistController extends AbstractController
 
                 $em->flush();
 
-                echo "Artiste enregistré";
+                $this->addFlash('success', 'Artiste enregistré !');
+
+                $msg = "Artiste enregistré !";
+
+                if ($artist->getId()) {
+                    return $this->redirect('artist/' . $artist->getId());
+                }
             } else {
                 echo "l'Artiste n'a pas été enregistré";
             }
@@ -50,7 +58,8 @@ class ArtistController extends AbstractController
 
         return $this->render('artist/index.html.twig', [
             'artistForm' => $artistForm->createView(),
-            'artists' => $artists
+            'artists' => $artists,
+            'msg' => $msg
         ]);
     }
 
@@ -58,7 +67,7 @@ class ArtistController extends AbstractController
     // Modifier un Artiste 
 
     /**
-     * @Route("artist/{id}/edit", name="artist_edit")
+     * @Route("artist/{id}", name="artist_edit")
      * @param Artist $artist
      * @param Request $request
      * @return Response
@@ -72,10 +81,18 @@ class ArtistController extends AbstractController
         if ($artistForm->isSubmitted() && $artistForm->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
-            return $this->redirectToRoute('artist');
+
+            $this->addFlash('success', 'Artiste modifié !');
         }
+
+
+        // Afficher une liste d'artistes
+        $artists = $this->getDoctrine()->getRepository(Artist::class)->findAll();
+
+
         return $this->render("artist/edit.html.twig", [
             'artistForm' => $artistForm->createView(),
+            'artists' => $artists,
         ]);
     }
 

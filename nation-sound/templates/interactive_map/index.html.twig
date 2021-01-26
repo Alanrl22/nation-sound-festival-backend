@@ -6,6 +6,11 @@
 <div class="container poi">
     <h1>Ajouter un point d'intérêt</h1>
 
+    {% for msg in app.session.flashBag.get('success') %}
+    <div class="success-message">
+        {{msg}}
+    </div>
+    {% endfor %}
 
     {{ form(stageForm) }}
 
