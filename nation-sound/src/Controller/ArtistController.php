@@ -28,8 +28,6 @@ class ArtistController extends AbstractController
 
         $artistForm->handleRequest($request);
 
-        $msg = "";
-
         if ($artistForm->isSubmitted()) {
 
             if ($artistForm->isValid()) {
@@ -41,8 +39,6 @@ class ArtistController extends AbstractController
                 $em->flush();
 
                 $this->addFlash('success', 'Artiste enregistré !');
-
-                $msg = "Artiste enregistré !";
 
                 if ($artist->getId()) {
                     return $this->redirect('artist/' . $artist->getId());
@@ -59,7 +55,6 @@ class ArtistController extends AbstractController
         return $this->render('artist/index.html.twig', [
             'artistForm' => $artistForm->createView(),
             'artists' => $artists,
-            'msg' => $msg
         ]);
     }
 
@@ -76,10 +71,15 @@ class ArtistController extends AbstractController
     {
 
         $artist = $entityManager->getRepository(Artist::class)->find($id);
+        
         $artistForm = $this->createForm(ArtistFormType::class, $artist);
+        
         $artistForm->handleRequest($request);
+        
         if ($artistForm->isSubmitted() && $artistForm->isValid()) {
+        
             $entityManager = $this->getDoctrine()->getManager();
+        
             $entityManager->flush();
 
             $this->addFlash('success', 'Artiste modifié !');

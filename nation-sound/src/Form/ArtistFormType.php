@@ -42,6 +42,7 @@ class ArtistFormType extends AbstractType
                 ],
                 'attr' => [
                     'class' => 'inline',
+                    'required'   => false,
                 ],
             ])
             ->add('Enregistrer', SubmitType::class);
