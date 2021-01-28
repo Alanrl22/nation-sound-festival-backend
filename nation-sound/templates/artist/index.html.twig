@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArtistController!{% endblock %}
+{% block title %}Artistes{% endblock %}
 
 {% block body %}
+
 <div class="container artist">
-    <h1>Ajouter un artiste</h1>
+
+    <h1>Fiche artiste</h1>
 
     {% for msg in app.session.flashBag.get('success') %}
     <div class="success-message">
@@ -20,13 +22,17 @@
         <ul>
             {% for artist in artists %}
             <li>
-                <p><a href="{{ path('artist_edit', {'id':artist.id}) }}">{{ artist.name }}</a></p>
-                <p><a href="{{ path('artist_delete', {"id": artist.id}) }}" class="btn btn-sm btn-outline-secondary" onclick="return confirm('Attention ce ci va supprimer l\'artist selectionner')">Delete</a>
+                <a href="{{ path('artist_edit', {'id':artist.id}) }}">
+                    <p><strong>{{ artist.name }}</strong> / {{artist.musicStyle}}</p>
+                    <img src="{{ asset('images/edit.svg') }}" alt="Modifier">
+                </a>
+                <a href="{{ path('artist_delete', {'id': artist.id}) }}" class="delete"
+                    onclick="return confirm('Attention ceci va supprimer l\'artist selectionné')"><button><img
+                            src="{{asset('images/delete.svg')}}" alt="Supprimer"></button></a>
             </li>
             {% endfor %}
         </ul>
     </div>
 </div>
-
 
 {% endblock %}

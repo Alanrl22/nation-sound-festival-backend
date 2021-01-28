@@ -16,21 +16,20 @@ class StageFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class,     [
+            ->add('title', TextType::class, [
                 'label' => 'Nom de la scène'
             ])
-            ->add('coordinate', TextType::class,     [
+            ->add('coordinate', TextType::class, [
                 'label' => 'Coordonnées'
             ])
-            ->add('Category', TextType::class,     [
+            ->add('Category', TextType::class, [
                 'label' => 'Catégorie'
             ])
-            ->add('festival', EntityType::class,     [
+            ->add('festival', EntityType::class, [
                 'class' => Festival::class,
                 'label' => 'Festival'
             ])
-            ->add('Enregister', SubmitType::class);
-        ;
+            ->add('Enregistrer', SubmitType::class);;
     }
 
     public function configureOptions(OptionsResolver $resolver)

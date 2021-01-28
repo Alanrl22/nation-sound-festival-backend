@@ -25,9 +25,12 @@
       {% for artist in artists %}
       <li>
         <a href="{{ path('artist_edit', {'id':artist.id}) }}">
-          <p><strong>{{ artist.name }}</strong> / {{ artist.description }}</p>
-          <img src="{{ asset('images/edit.svg') }}">
+          <p><strong>{{ artist.name }}</strong> / {{artist.musicStyle}}</p>
+          <img src="{{ asset('images/edit.svg') }}" alt="Editer">
         </a>
+        <a href="{{ path('artist_delete', {'id': artist.id}) }}" class="delete"
+          onclick="return confirm('Attention ceci va supprimer l\'artiste selectionné')"><button><img
+              src="{{asset('images/delete.svg')}}" alt="Supprimer"></button></a>
       </li>
       {% endfor %}
     </ul>

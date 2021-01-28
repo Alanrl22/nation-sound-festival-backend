@@ -37,6 +37,7 @@ class ArtistFormType extends AbstractType
             ])
             ->add('bigArtist', CheckboxType::class,     [
                 'label' => 'Tête d\'affiche ?',
+                'required' => false,
                 'label_attr' => [
                     'class' => 'inline',
                 ],
@@ -44,7 +45,7 @@ class ArtistFormType extends AbstractType
                     'class' => 'inline',
                 ],
             ])
-            ->add('Enregister', SubmitType::class);
+            ->add('Enregistrer', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
