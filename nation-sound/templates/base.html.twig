@@ -18,7 +18,7 @@
 <body>
   <header>
     <img src="{{ asset('images/LogoInline.svg') }}" alt="Nation Sounds Festival - Logo" id="logoSite" />
-    <a title="Accueil" href="/"><img src="{{ asset('images/home.svg') }}" alt="Home" id="homeSite" /></a>
+    <a href="{{ path('home_page') }}" title="Accueil" href="/"><img src="{{ asset('images/home.svg') }}" alt="Home" id="homeSite" /></a>
   </header>
   {% if app.user %}
   <div class="mb-3">
