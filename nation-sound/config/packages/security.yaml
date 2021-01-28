@@ -35,5 +35,15 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/admin, roles: ROLE_ADMIN }
+         - { path: ^/artist, roles: ROLE_USER }
+         - { path: ^/contact, roles: ROLE_USER }
+         - { path: ^/festival, roles: ROLE_USER }
+         - { path: ^/general-informations-actuality, roles: ROLE_USER }
+         - { path: ^/interactive-map, roles: ROLE_USER }
+         - { path: ^/legal-notice, roles: ROLE_USER }
+         - { path: ^/meeting, roles: ROLE_USER }
+         - { path: ^/partners, roles: ROLE_USER }
+         - { path: ^/pratical-informations-faq, roles: ROLE_USER }
+         - { path: ^/line-up, roles: ROLE_USER }
+
