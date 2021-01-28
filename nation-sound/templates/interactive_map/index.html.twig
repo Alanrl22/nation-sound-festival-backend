@@ -14,15 +14,18 @@
 
     {{ form(stageForm) }}
 
-
-    <h2>Liste des points d'intérêt</h2>
-
     <div class="list">
+        <h2>Liste des points d'intérêt</h2>
+
         <ul>
             {% for stage in stages %}
             <li>
-                <a>
+                <a href="#">
                     <p>{{ stage.title }}</p>
+                    <img src="{{ asset('images/edit.svg') }}" alt="Modifier">
+                </a>
+                <a href="#" class="delete">
+                    <button><img src="{{asset('images/delete.svg')}}" alt="Supprimer"></button>
                 </a>
             </li>
             {% endfor %}
