@@ -33,9 +33,9 @@ class InteractiveMapController extends AbstractController
 
                 $em->flush();
 
-                echo 'Scène ajoutée';
+                $this->addFlash('success', 'Point d\'intérêt ajouté !');
             } else {
-                var_dump("Scène non valide");
+                $this->addFlash('error', 'Erreur !');
             }
         }
 
@@ -48,16 +48,61 @@ class InteractiveMapController extends AbstractController
         ]);
     }
 
-    // /**
-    //  * @Route("/interactive-map/{id}", name="stage_show")
-    //  */
-    // public function show(int $id, StageRepository $stageRepository): Response
-    // {
-    //     $one_stage = $stageRepository
-    //         ->find($id);
 
-    //     return $this->render('interactive_map/index.html.twig', [
-    //         'stage' => $one_stage
-    //     ]);
-    // }
+    // Modifier un POI 
+
+    /**
+     * @Route("interactive-map/{id}", name="stage_edit")
+     * @param Stage $stage
+     * @param Request $request
+     * @return Response
+     */
+    public function editStage($id, Request $request, EntityManagerInterface $entityManager)
+    {
+
+        $stage = $entityManager->getRepository(Stage::class)->find($id);
+        
+        $stageForm = $this->createForm(StageFormType::class, $stage);
+        
+        $stageForm->handleRequest($request);
+        
+        if ($stageForm->isSubmitted() && $stageForm->isValid()) {
+        
+            $entityManager = $this->getDoctrine()->getManager();
+        
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Point d\'intérêt modifié !');
+        } else {
+            $this->addFlash('error', 'Erreur !');
+        }
+
+
+        // Afficher une liste de POI
+        $stages = $this->getDoctrine()->getRepository(Stage::class)->findAll();
+
+
+        return $this->render("interactive_map/index.html.twig", [
+            'stageForm' => $stageForm->createView(),
+            'stages' => $stages,
+        ]);
+    }
+
+    // Supprimer un POI
+
+    /**
+     * @Route("/interactive-map/{id}/delete", name="stage_delete")
+     * @param Stage $stage
+     * @return RedirectResponse
+     */
+    public function deleteStage($id, Request $request, EntityManagerInterface $entityManager)
+    {
+
+        $stage = $entityManager->getRepository(Stage::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($stage);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("interactive_map");
+    }
 }

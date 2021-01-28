@@ -30,19 +30,20 @@ class Stage
     private $coordinate;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Category;
-
-    /**
      * @ORM\OneToMany(targetEntity=Concert::class, mappedBy="stage")
      */
     private $concerts;
 
     /**
-     * @ORM\ManyToOne(targetEntity=festival::class, inversedBy="stages")
+     * @ORM\ManyToOne(targetEntity=Festival::class, inversedBy="stages")
      */
     private $festival;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=PoiCategory::class, inversedBy="idPoi")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
 
     public function __construct()
     {
@@ -74,18 +75,6 @@ class Stage
     public function setCoordinate(string $coordinate): self
     {
         $this->coordinate = $coordinate;
-
-        return $this;
-    }
-
-    public function getCategory(): ?string
-    {
-        return $this->Category;
-    }
-
-    public function setCategory(string $Category): self
-    {
-        $this->Category = $Category;
 
         return $this;
     }
@@ -128,6 +117,18 @@ class Stage
     public function setFestival(?festival $festival): self
     {
         $this->festival = $festival;
+
+        return $this;
+    }
+
+    public function getCategory(): ?PoiCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?PoiCategory $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

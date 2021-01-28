@@ -63,7 +63,7 @@ class FestivalController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function editArtist($id, Request $request, EntityManagerInterface $entityManager)
+    public function editFestival($id, Request $request, EntityManagerInterface $entityManager)
     {
 
         $festival = $entityManager->getRepository(Festival::class)->find($id);
@@ -99,7 +99,7 @@ class FestivalController extends AbstractController
      * @param Festival $festival
      * @return RedirectResponse
      */
-    public function deleteArtist($id, EntityManagerInterface $entityManager)
+    public function deleteFestival($id, EntityManagerInterface $entityManager)
     {
 
         $festival = $entityManager->getRepository(Festival::class)->find($id);

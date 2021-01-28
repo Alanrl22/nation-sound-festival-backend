@@ -1,35 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Les points d'intérêt{% endblock %}
+{% block title %}
+  Les points d'intérêt
+{% endblock %}
 
 {% block body %}
-<div class="container poi">
-    <h1>Ajouter un point d'intérêt</h1>
+  <div class="container poi">
+    <h1>
+      Ajouter un point d'intérêt
+    </h1>
 
     {% for msg in app.session.flashBag.get('success') %}
-    <div class="success-message">
-        {{msg}}
-    </div>
+      <div class="success-message">
+        {{ msg }}
+      </div>
     {% endfor %}
 
     {{ form(stageForm) }}
 
     <div class="list">
-        <h2>Liste des points d'intérêt</h2>
+      <h2>
+        Liste des points d'intérêt
+      </h2>
 
-        <ul>
-            {% for stage in stages %}
-            <li>
-                <a href="#">
-                    <p>{{ stage.title }}</p>
-                    <img src="{{ asset('images/edit.svg') }}" alt="Modifier">
-                </a>
-                <a href="#" class="delete">
-                    <button><img src="{{asset('images/delete.svg')}}" alt="Supprimer"></button>
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
+      <ul>
+        {% for stage in stages %}
+          <li>
+            <a href="{{
+              path(
+                'stage_edit',
+                {
+                  id: stage.id
+                }
+              )
+              }}">
+              <p>
+                {{ stage.title }}
+              </p>
+              <img src="{{ asset('images/edit.svg') }}" alt="Modifier" />
+            </a>
+            <a href="{{
+              path(
+                'stage_delete',
+                {
+                  id: stage.id
+                }
+              )
+              }}"
+              class="delete"
+              onclick="return confirm('Attention ceci va supprimer l\'artist selectionné')">
+              <button>
+                <img src="{{ asset('images/delete.svg') }}" alt="Supprimer" />
+              </button>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
     </div>
-</div>
+  </div>
 {% endblock %}
