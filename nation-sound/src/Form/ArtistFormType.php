@@ -37,12 +37,12 @@ class ArtistFormType extends AbstractType
             ])
             ->add('bigArtist', CheckboxType::class,     [
                 'label' => 'Tête d\'affiche ?',
+                'required' => false,
                 'label_attr' => [
                     'class' => 'inline',
                 ],
                 'attr' => [
                     'class' => 'inline',
-                    'required'   => false,
                 ],
             ])
             ->add('Enregistrer', SubmitType::class);
