@@ -90,7 +90,7 @@ class ArtistController extends AbstractController
         $artists = $this->getDoctrine()->getRepository(Artist::class)->findAll();
 
 
-        return $this->render("artist/edit.html.twig", [
+        return $this->render("artist/index.html.twig", [
             'artistForm' => $artistForm->createView(),
             'artists' => $artists,
         ]);

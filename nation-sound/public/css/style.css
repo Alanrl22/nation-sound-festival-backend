@@ -40,8 +40,8 @@ h2 {
 
 .success-message {
   background-color: #d0f4de;
-  border: 1px solid green;
-  margin: -2em auto 2em;
+  border: 1px solid black;
+  margin: -3em auto 1.5em;
   text-align: center;
   padding: 0.5em;
   width: 98%;
