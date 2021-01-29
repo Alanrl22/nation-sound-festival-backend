@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Users;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,8 +27,7 @@ class EditUserType extends AbstractType
         ])
         ->add('roles', ChoiceType::class, [
             'choices' => [
-                'Utilisateur' => 'ROLE_USER',
-                'Editeur' => 'ROLE_EDITOR',
+                'Organisateur' => 'ROLE_ORGANISATEUR',
                 'Administrateur' => 'ROLE_ADMIN'
             ],
             'expanded' => true,
@@ -42,7 +41,7 @@ class EditUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Users::class,
+            'data_class' => User::class,
         ]);
     }
 }

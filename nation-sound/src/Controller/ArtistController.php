@@ -8,6 +8,7 @@ use App\Repository\ArtistRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,6 +34,25 @@ class ArtistController extends AbstractController
             if ($artistForm->isValid()) {
 
                 $em = $this->getDoctrine()->getManager();
+
+
+                $fichier = $artistForm->get('image')->getData();
+            if($fichier){
+                $nomFichier = uniqid() .'.'. $fichier->guessExtension();
+
+                try{
+                    $fichier->move(
+                        $this->getParameter('images_dir'),
+                        $nomFichier
+                    );
+                }
+                catch(FileException $e){
+                    return $this->redirectToRoute('artist');
+                }
+
+                $artist->setImage($nomFichier);
+            }
+            
 
                 $em->persist($artist);
 
