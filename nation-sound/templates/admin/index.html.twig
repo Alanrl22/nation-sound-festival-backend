@@ -9,12 +9,12 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Welcome in AdminPage ✅</h1>
 
-    This friendly message is coming from:
     <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/php/nation-sound-festival-backend/nation-sound/src/Controller/AdminController.php'|file_link(0) }}">src/Controller/AdminController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/php/nation-sound-festival-backend/nation-sound/templates/admin/index.html.twig'|file_link(0) }}">templates/admin/index.html.twig</a></code></li>
+        <a href="{{ path('app_register') }}"><button class="big_btn">S'inscrire</button></a>
+        <a href="/admin/utilisateurs"><button class="big_btn">Modification User</button></a>
+        
     </ul>
 </div>
 {% endblock %}
