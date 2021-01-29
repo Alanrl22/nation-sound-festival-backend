@@ -20,10 +20,8 @@
                     <td>
                         {# On boucle sur les rôles #}
                         {% for role in user.roles %}
-                            {% if role == "ROLE_USER" %}
-                                Utilisateur
-                            {% elseif role == "ROLE_EDITOR" %}
-                                Editeur
+                            {% if role == "ROLE_ORGANISATEUR" %}
+                                Organisateur
                             {% elseif role == "ROLE_ADMIN" %}
                                 Administrateur
                             {% endif %}
