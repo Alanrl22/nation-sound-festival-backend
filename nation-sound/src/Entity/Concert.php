@@ -20,16 +20,6 @@ class Concert
     private $id;
 
     /**
-     * @ORM\Column(type="date")
-     */
-    private $startDate;
-
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $endDate;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $active;
@@ -44,34 +34,20 @@ class Concert
      */
     private $stage;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $Day;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $Hour;
+
     
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getStartDate(): ?\DateTimeInterface
-    {
-        return $this->startDate;
-    }
-
-    public function setStartDate(\DateTimeInterface $startDate): self
-    {
-        $this->startDate = $startDate;
-
-        return $this;
-    }
-
-    public function getEndDate(): ?\DateTimeInterface
-    {
-        return $this->endDate;
-    }
-
-    public function setEndDate(\DateTimeInterface $endDate): self
-    {
-        $this->endDate = $endDate;
-
-        return $this;
     }
 
     public function getActive(): ?bool
@@ -106,6 +82,30 @@ class Concert
     public function setStage(?stage $stage): self
     {
         $this->stage = $stage;
+
+        return $this;
+    }
+
+    public function getDay(): ?\DateTimeInterface
+    {
+        return $this->Day;
+    }
+
+    public function setDay(?\DateTimeInterface $Day): self
+    {
+        $this->Day = $Day;
+
+        return $this;
+    }
+
+    public function getHour(): ?\DateTimeInterface
+    {
+        return $this->Hour;
+    }
+
+    public function setHour(?\DateTimeInterface $Hour): self
+    {
+        $this->Hour = $Hour;
 
         return $this;
     }
