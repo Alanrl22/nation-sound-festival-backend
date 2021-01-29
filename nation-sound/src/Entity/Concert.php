@@ -35,14 +35,15 @@ class Concert
     private $stage;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $Day;
+    private $day;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $Hour;
+  
+    private $hour;
 
     
     public function getId(): ?int
@@ -86,27 +87,29 @@ class Concert
         return $this;
     }
 
-    public function getDay(): ?\DateTimeInterface
+    public function getDay(): ?string
     {
-        return $this->Day;
+        return $this->day;
     }
 
-    public function setDay(?\DateTimeInterface $Day): self
+    public function setDay(?string $day): self
     {
-        $this->Day = $Day;
+        $this->day = $day;
 
         return $this;
     }
 
-    public function getHour(): ?\DateTimeInterface
+    public function getHour(): ?int
     {
-        return $this->Hour;
+        return $this->hour;
     }
 
-    public function setHour(?\DateTimeInterface $Hour): self
+    public function setHour(?int $hour): self
     {
-        $this->Hour = $Hour;
+        $this->hour = $hour;
 
         return $this;
     }
+
+
 }

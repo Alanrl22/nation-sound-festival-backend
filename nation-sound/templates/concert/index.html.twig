@@ -17,12 +17,12 @@
     {{ form(concertForm) }}
 
     <div class="list">
-        <h2>Liste des concert</h2>
+        <h2>Liste des concerts</h2>
         <ul>
             {% for concert in concerts %}
             <li>
                 <a href="{{ path('artist_edit', {'id':concert.id}) }}">
-                    <p><strong>{{ concert.artist }}</strong> / {{concert.hour}}</p>
+                    <p><strong>{{ concert.artist }}</strong> {{ concert.day}} / {{concert.hour}}h</p>
                     <img src="{{ asset('images/edit.svg') }}" alt="Modifier">
                 </a>
                 <a href="{{ path('artist_delete', {'id': concert.id}) }}" class="delete"

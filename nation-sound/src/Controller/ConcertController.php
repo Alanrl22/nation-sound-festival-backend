@@ -35,13 +35,12 @@ class ConcertController extends AbstractController
 
                 $em->flush();
 
-                $this->addFlash('success', 'Artiste enregistré !');
+                $this->addFlash('success', 'Concert enregistré !');
 
-                if ($concert->getId()) {
-                    return $this->redirect('concert/' . $concert->getId());
-                }
+                return $this->redirect('concert');
+            
             } else {
-                echo "l'Artiste n'a pas été enregistré";
+                $this->addFlash('error', 'Le concert n\'est pas enregistré !');
             }
         }
 
