@@ -24,6 +24,7 @@
             <li>
                 <a href="{{ path('artist_edit', {'id':artist.id}) }}">
                     <p><strong>{{ artist.name }}</strong> / {{artist.musicStyle}}</p>
+                    <img src="{{ asset('images/' ~ artist.image) }}" style="width: 150px">
                     <img src="{{ asset('images/edit.svg') }}" alt="Modifier">
                 </a>
                 <a href="{{ path('artist_delete', {'id': artist.id}) }}" class="delete"
