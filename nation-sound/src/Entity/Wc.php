@@ -23,7 +23,7 @@ class Wc
     private $title;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $number;
 
@@ -33,24 +33,25 @@ class Wc
     private $coordinates;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $gender;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $company;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $category;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=festival::class, inversedBy="wcs")
+     * @ORM\ManyToOne(targetEntity=Festival::class, inversedBy="wcs")
      */
     private $festival;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=PoiCategory::class, inversedBy="idWc")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
 
     public function getId(): ?int
     {
@@ -117,18 +118,6 @@ class Wc
         return $this;
     }
 
-    public function getCategory(): ?string
-    {
-        return $this->category;
-    }
-
-    public function setCategory(string $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
     public function getFestival(): ?festival
     {
         return $this->festival;
@@ -137,6 +126,18 @@ class Wc
     public function setFestival(?festival $festival): self
     {
         $this->festival = $festival;
+
+        return $this;
+    }
+
+    public function getCategory(): ?PoiCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?PoiCategory $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

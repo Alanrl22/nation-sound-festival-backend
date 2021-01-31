@@ -27,7 +27,7 @@ class Stage
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $coordinate;
+    private $coordinates;
 
     /**
      * @ORM\OneToMany(targetEntity=Concert::class, mappedBy="stage")
@@ -40,7 +40,7 @@ class Stage
     private $festival;
 
     /**
-     * @ORM\ManyToOne(targetEntity=PoiCategory::class, inversedBy="idPoi")
+     * @ORM\ManyToOne(targetEntity=PoiCategory::class, inversedBy="idStage")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
@@ -67,14 +67,14 @@ class Stage
         return $this;
     }
 
-    public function getCoordinate(): ?string
+    public function getCoordinates(): ?string
     {
-        return $this->coordinate;
+        return $this->coordinates;
     }
 
-    public function setCoordinate(string $coordinate): self
+    public function setCoordinates(string $coordinates): self
     {
-        $this->coordinate = $coordinate;
+        $this->coordinates = $coordinates;
 
         return $this;
     }

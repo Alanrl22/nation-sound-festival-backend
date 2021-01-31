@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-  Les points d'intérêt
+  Modifier un bar
 {% endblock %}
 
 {% block body %}
   <div class="container poi">
+  <a href="{{path('interactive_map')}}" class="newPoi"><button class="small-btn">Ajouter un nouveau POI →</button></a>
     <h1>
-      Ajouter un point d'intérêt
+      Modifier un bar
     </h1>
 
     {% for msg in app.session.flashBag.get('success') %}
@@ -22,7 +23,7 @@
       </div>
     {% endfor %}
 
-    {{ form(poiForm) }}
+    {{ form(barForm) }}
 
     <div class="list">
       <h2>
@@ -38,10 +39,8 @@
               href="{{path('wc_edit',{id: poi.id})}}"
             {% elseif poi.category == 'bar' %}
               href="{{path('bar_edit',{id: poi.id})}}"
-            {# {% elseif poi.category == 'catering' %}
-              href="{{path('catering_edit',{id: poi.id})}}" #}
-            {% else %}
-            href="#"
+            {% elseif poi.category == 'catering' %}
+              href="{{path('catering_edit',{id: poi.id})}}"
             {% endif %}>
               <p>
                <strong>{{ poi.title }}</strong> / {{ poi.category }} 
@@ -67,32 +66,4 @@
       </ul>
     </div>
   </div>
-{% endblock %}
-
-{% block javascripts %}
-  <script type="text/javascript">
-    const selectCategory = document.querySelector('.selectCategory');
-    const description = document.querySelector('.description');
-    const gender = document.querySelector('.gender');
-    const number = document.querySelector('.number');
-    const company = document.querySelector('.company');
-
-    selectCategory.addEventListener('change', (event) => {
-      let element = event.target.options[event.target.value].text;
-        description.parentElement.style.display = "block";
-        gender.parentElement.style.display = "block";
-        number.parentElement.style.display = "block";
-        company.parentElement.style.display = "block";
-
-      if (element === 'stage') {
-        description.parentElement.style.display = "none";
-        company.parentElement.style.display = "none";
-      } else if (element === 'wc') {
-        description.parentElement.style.display = "none";
-      } else if (element === 'bar' || event.target.value === 'catering') {
-        gender.parentElement.style.display = "none";
-        number.parentElement.style.display = "none";
-      }
-    });
-  </script>
 {% endblock %}

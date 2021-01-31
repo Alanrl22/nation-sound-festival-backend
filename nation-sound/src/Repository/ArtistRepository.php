@@ -35,6 +35,19 @@ class ArtistRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findByFilter($value)
+    {
+        $queryBuilder = $this->createQueryBuilder('a');
+        if ($value) {
+            $queryBuilder->andWhere('a.bigArtist = :val')
+                ->setParameter('val', true);
+            // ->setMaxResults(10)
+        }
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
 
     /*
     public function findOneBySomeField($value): ?Artist

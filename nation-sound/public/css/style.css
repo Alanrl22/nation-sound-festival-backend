@@ -93,6 +93,25 @@ button[type="submit"], .big_btn {
   padding: 0.6em 4em;
 }
 
+.small-btn {
+  /* background: #d0f4de; */
+  border-radius: 50px;
+  border: 1px solid black;
+  box-shadow: -2px 5px 0 #a9def9;
+  cursor: pointer;
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin: auto;
+  /* min-width: 20rem; */
+  padding: 0.4em 1.6em;
+}
+
+a.newPoi {
+  text-decoration: none;
+  margin: 1.5em 0 -1.5em auto;
+}
+
 /* LISTE DES ELEMENTS ENREGISTRES */
 
 .list {

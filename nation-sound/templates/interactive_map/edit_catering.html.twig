@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Modifier un point restauration
+{% endblock %}
+
+{% block body %}
+  <div class="container poi">
+  <a href="{{path('interactive_map')}}" class="newPoi"><button class="small-btn">Ajouter un nouveau POI →</button></a>
+    <h1>
+      Modifier un point restauration
+    </h1>
+
+    {% for msg in app.session.flashBag.get('success') %}
+      <div class="success-message">
+        {{ msg }}
+      </div>
+    {% endfor %}
+
+    {% for msg in app.session.flashBag.get('error') %}
+      <div class="error-message">
+        {{ msg }}
+      </div>
+    {% endfor %}
+
+    {{ form(stageForm) }}
+
+    <div class="list">
+      <h2>
+        Liste des points d'intérêt
+      </h2>
+
+      <ul>
+        {% for poi in pois %}
+          <li>
+            <a {% if poi.category == 'stage' %}
+              href="{{path('stage_edit',{id: poi.id})}}"
+            {% elseif poi.category == 'wc' %}
+              href="{{path('wc_edit',{id: poi.id})}}"
+            {% elseif poi.category == 'bar' %}
+              href="{{path('bar_edit',{id: poi.id})}}"
+            {% elseif poi.category == 'catering' %}
+              href="{{path('catering_edit',{id: poi.id})}}"
+            {% endif %}>
+              <p>
+               <strong>{{ poi.title }}</strong> / {{ poi.category }} 
+              </p>
+              <img src="{{ asset('images/edit.svg') }}" alt="Modifier" />
+            </a>
+            <a href="{{path('poi_delete',{id: poi.id})}}" class="delete"
+              onclick="return confirm('Êtes-vous sûr de vouloir supprimer le point d\'intérêt selectionné ?')">
+              <button>
+                <img src="{{ asset('images/delete.svg') }}" alt="Supprimer" />
+              </button>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}

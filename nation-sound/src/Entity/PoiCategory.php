@@ -27,11 +27,23 @@ class PoiCategory
     /**
      * @ORM\OneToMany(targetEntity=Stage::class, mappedBy="category", orphanRemoval=true)
      */
-    private $idPoi;
+    private $idStage;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Wc::class, mappedBy="category", orphanRemoval=true)
+     */
+    private $idWc;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Bar::class, mappedBy="category", orphanRemoval=true)
+     */
+    private $idBar;
 
     public function __construct()
     {
-        $this->idPoi = new ArrayCollection();
+        $this->idStage = new ArrayCollection();
+        $this->idWc = new ArrayCollection();
+        $this->idBar = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -54,27 +66,27 @@ class PoiCategory
     /**
      * @return Collection|Stage[]
      */
-    public function getIdPoi(): Collection
+    public function getidStage(): Collection
     {
-        return $this->idPoi;
+        return $this->idStage;
     }
 
-    public function addIdPoi(Stage $idPoi): self
+    public function addidStage(Stage $idStage): self
     {
-        if (!$this->idPoi->contains($idPoi)) {
-            $this->idPoi[] = $idPoi;
-            $idPoi->setCategory($this);
+        if (!$this->idStage->contains($idStage)) {
+            $this->idStage[] = $idStage;
+            $idStage->setCategory($this);
         }
 
         return $this;
     }
 
-    public function removeIdPoi(Stage $idPoi): self
+    public function removeidStage(Stage $idStage): self
     {
-        if ($this->idPoi->removeElement($idPoi)) {
+        if ($this->idStage->removeElement($idStage)) {
             // set the owning side to null (unless already changed)
-            if ($idPoi->getCategory() === $this) {
-                $idPoi->setCategory(null);
+            if ($idStage->getCategory() === $this) {
+                $idStage->setCategory(null);
             }
         }
 
@@ -84,5 +96,65 @@ class PoiCategory
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection|Wc[]
+     */
+    public function getIdWc(): Collection
+    {
+        return $this->idWc;
+    }
+
+    public function addIdWc(Wc $idWc): self
+    {
+        if (!$this->idWc->contains($idWc)) {
+            $this->idWc[] = $idWc;
+            $idWc->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdWc(Wc $idWc): self
+    {
+        if ($this->idWc->removeElement($idWc)) {
+            // set the owning side to null (unless already changed)
+            if ($idWc->getCategory() === $this) {
+                $idWc->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Bar[]
+     */
+    public function getIdBar(): Collection
+    {
+        return $this->idBar;
+    }
+
+    public function addIdBar(Bar $idBar): self
+    {
+        if (!$this->idBar->contains($idBar)) {
+            $this->idBar[] = $idBar;
+            $idBar->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdBar(Bar $idBar): self
+    {
+        if ($this->idBar->removeElement($idBar)) {
+            // set the owning side to null (unless already changed)
+            if ($idBar->getCategory() === $this) {
+                $idBar->setCategory(null);
+            }
+        }
+
+        return $this;
     }
 }

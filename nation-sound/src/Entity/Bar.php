@@ -30,22 +30,23 @@ class Bar
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $category;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $coordinates;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $companny;
+    private $company;
 
     /**
      * @ORM\ManyToOne(targetEntity=festival::class, inversedBy="bars")
      */
     private $festival;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=PoiCategory::class, inversedBy="idBar")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
 
     public function getId(): ?int
     {
@@ -76,18 +77,6 @@ class Bar
         return $this;
     }
 
-    public function getCategory(): ?string
-    {
-        return $this->category;
-    }
-
-    public function setCategory(string $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
     public function getCoordinates(): ?string
     {
         return $this->coordinates;
@@ -100,14 +89,14 @@ class Bar
         return $this;
     }
 
-    public function getCompanny(): ?string
+    public function getcompany(): ?string
     {
-        return $this->companny;
+        return $this->company;
     }
 
-    public function setCompanny(string $companny): self
+    public function setcompany(string $company): self
     {
-        $this->companny = $companny;
+        $this->company = $company;
 
         return $this;
     }
@@ -120,6 +109,18 @@ class Bar
     public function setFestival(?festival $festival): self
     {
         $this->festival = $festival;
+
+        return $this;
+    }
+
+    public function getCategory(): ?PoiCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?PoiCategory $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
