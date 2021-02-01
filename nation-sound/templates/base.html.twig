@@ -16,9 +16,12 @@
 
   <body>
     <header>
-      <img src="{{ asset('images/LogoInline.svg') }}"
-        alt="Nation Sounds Festival - Logo"
-        id="logoSite" />
+      <a href="{{ path('home_page') }}" title="Accueil" href="/">
+        <img src="{{ asset('images/LogoInline.svg') }}"
+          alt="Nation Sounds Festival - Logo"
+          id="logoSite" />
+      </a>
+
       <a href="{{ path('home_page') }}" title="Accueil" href="/">
         <img src="{{ asset('images/home.svg') }}" alt="Home" id="homeSite" />
       </a>
@@ -33,7 +36,10 @@
 
   <footer>
     {% if app.user %}
-        Vous êtes connecté(e) en tant que <strong>{{ app.user.username }}</strong> <a href="{{ path('app_logout') }}"><button class="small-btn logout-btn" type="button">Déconnexion</button></a>
+      Vous êtes connecté(e) en tant que <strong>{{ app.user.username }}</strong>
+      <a href="{{ path('app_logout') }}">
+        <button class="small-btn logout-btn" type="button">Déconnexion</button>
+      </a>
     {% endif %}
   </footer>
 </html>
