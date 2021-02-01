@@ -1,12 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Artistes{% endblock %}
+{% block title %}Hello ConcertController!{% endblock %}
 
 {% block body %}
-
 <div class="container artist">
 
-    <h1>Fiche artiste</h1>
+    <h1>Fiche Concert</h1>
 
     {% for msg in app.session.flashBag.get('success') %}
     <div class="success-message">
@@ -15,19 +14,18 @@
     {% endfor %}
 
 
-    {{ form(artistForm) }}
+    {{ form(concertForm) }}
 
     <div class="list">
-        <h2>Liste des artistes</h2>
+        <h2>Liste des concerts</h2>
         <ul>
-            {% for artist in artists %}
+            {% for concert in concerts %}
             <li>
-                <a href="{{ path('artist_edit', {'id':artist.id}) }}">
-                    <p><strong>{{ artist.name }}</strong> / {{artist.musicStyle}}</p>
-                    <img src="{{ asset('images/' ~ artist.image) }}" style="width: 150px">
+                <a href="{{ path('artist_edit', {'id':concert.id}) }}">
+                    <p><strong>{{ concert.artist }}</strong> {{ concert.day}} / {{concert.hour}}h</p>
                     <img src="{{ asset('images/edit.svg') }}" alt="Modifier">
                 </a>
-                <a href="{{ path('artist_delete', {'id': artist.id}) }}" class="delete"
+                <a href="{{ path('artist_delete', {'id': concert.id}) }}" class="delete"
                     onclick="return confirm('Attention ceci va supprimer l\'artist selectionné')"><button><img
                             src="{{asset('images/delete.svg')}}" alt="Supprimer"></button></a>
             </li>
@@ -35,5 +33,6 @@
         </ul>
     </div>
 </div>
+
 
 {% endblock %}

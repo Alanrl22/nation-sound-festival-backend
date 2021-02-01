@@ -2,35 +2,22 @@
 
 namespace App\Form;
 
-use App\Entity\Meeting;
+use App\Entity\Concert;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType as TypeDateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MeetingFormType extends AbstractType
+class ConcertFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('artist')
-            ->add('description')
-            ->add('coordinates')
             ->add('hour', ChoiceType::class, [
                 'choices' =>[
-                    "00h" => 0,
-                    "01h" => 1, 
-                    "02h" => 2,
-                    "03h" => 3,
-                    "04h" => 4,
-                    "05h" => 5,
-                    "06h" => 6,
-                    "07h" => 7,
-                    "08h" => 8,
-                    "09h" => 9,
-                    "10h" => 10,
-                    "11h" => 11,
                     "12h" =>12,
                     "13h"=> 13,
                     "14h"=> 14,
@@ -43,7 +30,9 @@ class MeetingFormType extends AbstractType
                     "21h"=> 21,
                     "22h"=> 22,
                     "23h"=> 23,
-                
+                    "00h" => 0,
+                    "01h" => 1, 
+                    "02h" => 2,
                 ]
             ])
             ->add('day', ChoiceType::class, [
@@ -58,6 +47,9 @@ class MeetingFormType extends AbstractType
                 ] 
             ]
             )
+            ->add('active')
+            ->add('artist')
+            ->add('stage')
             ->add('Enregistrer', SubmitType::class);
         ;
     }
@@ -65,7 +57,7 @@ class MeetingFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Meeting::class,
+            'data_class' => Concert::class,
         ]);
     }
 }

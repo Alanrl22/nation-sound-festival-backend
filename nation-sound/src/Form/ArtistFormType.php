@@ -11,8 +11,10 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class ArtistFormType extends AbstractType
 {
@@ -32,8 +34,21 @@ class ArtistFormType extends AbstractType
                     'rows' => 10,
                 ],
             ])
-            ->add('image', TextType::class,     [
-                'label' => 'Image'
+            ->add('image', FileType::class, [
+                'label' => 'Aperçu du produit',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpg',
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez upload une image valide',
+                    ])
+                ],
             ])
             ->add('bigArtist', CheckboxType::class,     [
                 'label' => 'Tête d\'affiche ?',
