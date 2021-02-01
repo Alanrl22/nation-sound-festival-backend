@@ -4,19 +4,18 @@
 
 {% block body %}
 
-<div class="example-wrapper">
+<div class="menu">
     
-    <a href="{{ path('festival') }}"><button class="big_btn"> Créer un festival</button></a>
-    <a href="{{ path('concert') }}"><button class="big_btn"> Programmer un artiste </button></a>
-    <a href="{{ path('artist') }}"><button class="big_btn"> Créer un artiste</button></a>
-    <a href="{{ path('contact') }}"><button class="big_btn"> Créer un contact</button></a>
-    <a href="{{ path('meet_artists') }}"><button class="big_btn"> Rencontre avec un artiste</button></a>
-    <a href="{{ path('interactive_map') }}"><button class="big_btn"> Créer un point d'intérêt</button></a>
-    <a href="{{ path('partners') }}"><button class="big_btn"> Les Partenaires </button></a>
-    <a href="{{ path('general_informations_actuality') }}"><button class="big_btn"> Informations Pratiques et FAQ</button></a>
-    <a href="{{ path('legal_notice') }}"><button class="big_btn"> Mentions Légales </button></a>
+    <a href="{{ path('festival') }}"><button class="big_btn menu-btn" type="button"> Créer un festival</button></a>
+    <a href="{{ path('concert') }}"><button class="big_btn menu-btn" type="button"> Programmer un artiste </button></a>
+    <a href="{{ path('artist') }}"><button class="big_btn menu-btn" type="button"> Créer un artiste</button></a>
+    <a href="{{ path('contact') }}"><button class="big_btn menu-btn" type="button"> Créer un contact</button></a>
+    <a href="{{ path('meeting') }}"><button class="big_btn menu-btn" type="button"> Rencontre avec un artiste</button></a>
+    <a href="{{ path('interactive_map') }}"><button class="big_btn menu-btn" type="button"> Créer un point d'intérêt</button></a>
+    <a href="{{ path('partners') }}"><button class="big_btn menu-btn" type="button"> Les Partenaires </button></a>
+    <a href="{{ path('general_informations_actuality') }}"><button class="big_btn menu-btn" type="button"> Informations Pratiques et FAQ</button></a>
+    <a href="{{ path('legal_notice') }}"><button class="big_btn menu-btn" type="button"> Mentions Légales </button></a>
     
-
 </div>
 {% endblock %}
 

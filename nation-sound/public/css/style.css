@@ -6,6 +6,14 @@ body {
   margin: 0;
 }
 
+footer {
+  border-top: 2px solid orange;
+  font-size: 0.8em;
+  margin: 4em 2em 0 2em;
+  padding: 1em;
+  text-align: center;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -38,6 +46,69 @@ h2 {
   margin-bottom: 2em;
   width: 100%;
 }
+
+
+button[type="submit"],
+.big_btn {
+  background: #d0f4de;
+  border-radius: 50px;
+  border: 1px solid black;
+  box-shadow: -2px 5px 0 #a9def9;
+  cursor: pointer;
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: auto;
+  /* min-width: 20rem; */
+  padding: 0.6em 4em;
+}
+
+.small-btn {
+  /* background: #d0f4de; */
+  border-radius: 50px;
+  border: 1px solid black;
+  box-shadow: -2px 5px 0 #a9def9;
+  cursor: pointer;
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin: auto;
+  /* min-width: 20rem; */
+  padding: 0.4em 1.6em;
+}
+
+.logout-btn {
+  display: inline;
+  margin-left: 1em;
+}
+
+
+/* MENU */
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 75vh;
+}
+
+.menu a {
+  text-decoration: none;
+  margin: 0.5em auto;
+}
+
+.menu-btn {
+  padding: 0.6em 1em;
+  min-width: 90vw;
+}
+
+@media (min-width: 640px) {
+  .menu-btn {
+    min-width: 20em;
+  }
+}
+
+/* FORMULAIRES */
 
 .success-message {
   background-color: #d0f4de;
@@ -92,35 +163,6 @@ input[type="checkbox"] {
   font-weight: bold;
   list-style: none;
   text-align: right;
-}
-
-button[type="submit"],
-.big_btn {
-  background: #d0f4de;
-  border-radius: 50px;
-  border: 1px solid black;
-  box-shadow: -2px 5px 0 #a9def9;
-  cursor: pointer;
-  display: block;
-  font-size: 1.125rem;
-  font-weight: 700;
-  margin: auto;
-  /* min-width: 20rem; */
-  padding: 0.6em 4em;
-}
-
-.small-btn {
-  /* background: #d0f4de; */
-  border-radius: 50px;
-  border: 1px solid black;
-  box-shadow: -2px 5px 0 #a9def9;
-  cursor: pointer;
-  display: block;
-  font-size: 0.8rem;
-  font-weight: 700;
-  margin: auto;
-  /* min-width: 20rem; */
-  padding: 0.4em 1.6em;
 }
 
 a.newPoi {
