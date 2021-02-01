@@ -29,17 +29,19 @@ class Meeting
      */
     private $coordinates;
 
-    /**
-     * @ORM\Column(type="integer")
+     /**
+     * @ORM\Column(type="integer", nullable=true)
      */
+  
     private $hour;
 
-    /**
-     * @ORM\Column(type="date")
+   /**
+     * @ORM\Column(type="string", nullable=true)
      */
     private $day;
 
     /**
+     *@var string
      * @ORM\OneToMany(targetEntity=Artist::class, mappedBy="meeting")
      */
     private $artist;
@@ -83,19 +85,19 @@ class Meeting
         return $this->hour;
     }
 
-    public function setHour(int $hour): self
+    public function setHour(?int $hour): self
     {
         $this->hour = $hour;
 
         return $this;
     }
 
-    public function getDay(): ?\DateTimeInterface
+    public function getDay(): ?string
     {
         return $this->day;
     }
 
-    public function setDay(\DateTimeInterface $day): self
+    public function setDay(?string $day): self
     {
         $this->day = $day;
 
