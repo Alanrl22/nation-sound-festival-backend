@@ -43,7 +43,7 @@ class Restauration
     private $company;
 
     /**
-     * @ORM\ManyToOne(targetEntity=festival::class, inversedBy="restaurations")
+     * @ORM\ManyToOne(targetEntity=Festival::class, inversedBy="restaurations")
      */
     private $festival;
 

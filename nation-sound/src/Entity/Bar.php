@@ -38,7 +38,7 @@ class Bar
     private $company;
 
     /**
-     * @ORM\ManyToOne(targetEntity=festival::class, inversedBy="bars")
+     * @ORM\ManyToOne(targetEntity=Festival::class, inversedBy="bars")
      */
     private $festival;
 

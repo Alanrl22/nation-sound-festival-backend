@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Bar;
+use App\Entity\Restauration;
 use App\Entity\Stage;
 use App\Entity\Wc;
+use App\Form\BarFormType;
+use App\Form\CateringFormType;
 use App\Form\PoiFormType;
 use App\Form\StageFormType;
 use App\Form\WcFormType;
@@ -89,9 +92,29 @@ class InteractiveMapController extends AbstractController
 
                         $entityManager->flush();
 
-                        $this->addFlash('success', 'Point WC ajouté !');
+                        $this->addFlash('success', 'Bar ajouté !');
 
                         return $this->redirectToRoute("bar_edit", ['id' => $wc->getId()]);
+
+                        break;
+
+                    case 'catering':
+                        $catering = new Restauration();
+
+                        $catering->setFestival($poiForm->get('festival')->getData());
+                        $catering->setCategory($poiForm->get('category')->getData());
+                        $catering->setTitle($poiForm->get('title')->getData());
+                        $catering->setCoordinates($poiForm->get('coordinates')->getData());
+                        $catering->setDescription($poiForm->get('description')->getData());
+                        $catering->setCompany($poiForm->get('company')->getData());
+
+                        $entityManager->persist($catering);
+
+                        $entityManager->flush();
+
+                        $this->addFlash('success', 'Point restauration ajouté !');
+
+                        return $this->redirectToRoute("catering_edit", ['id' => $catering->getId()]);
 
                         break;
 
@@ -100,7 +123,7 @@ class InteractiveMapController extends AbstractController
                         return $this->createNotFoundException();
                 }
             } else {
-                $this->addFlash('error', 'Erreur !');
+                $this->addFlash('error', 'Erreur ! Le point d\'intérêt n\'a pas été ajouté');
             }
         }
 
@@ -119,9 +142,16 @@ class InteractiveMapController extends AbstractController
         $barRepo = $entityManager->getRepository(Bar::class);
         $bars = $barRepo->findAll();
 
+        // Récupère tous les bars
+        $cateringRepo = $entityManager->getRepository(Restauration::class);
+        $caterings = $cateringRepo->findAll();
+
         return $this->render('interactive_map/index.html.twig', [
             'poiForm' => $poiForm->createView(),
-            'pois' => $stages + $wcs + $bars,
+            'stages' => $stages,
+            'wcs' => $wcs,
+            'bars' => $bars,
+            'caterings' => $caterings,
         ]);
     }
 
@@ -154,9 +184,6 @@ class InteractiveMapController extends AbstractController
             }
         }
 
-        // Afficher une liste de POI
-        // $stages = $this->getDoctrine()->getRepository(Stage::class)->findAll();
-
         // Récupère toutes les scènes
         $stageRepo = $entityManager->getRepository(Stage::class);
         $stages = $stageRepo->findAll();
@@ -169,10 +196,16 @@ class InteractiveMapController extends AbstractController
         $barRepo = $entityManager->getRepository(Bar::class);
         $bars = $barRepo->findAll();
 
+        // Récupère tous les bars
+        $cateringRepo = $entityManager->getRepository(Restauration::class);
+        $caterings = $cateringRepo->findAll();
 
         return $this->render("interactive_map/edit_stage.html.twig", [
             'stageForm' => $stageForm->createView(),
-            'pois' => $stages + $wcs + $bars,
+            'stages' => $stages,
+            'wcs' => $wcs,
+            'bars' => $bars,
+            'caterings' => $caterings,
         ]);
     }
 
@@ -206,9 +239,6 @@ class InteractiveMapController extends AbstractController
             }
         }
 
-        // Afficher une liste de POI
-        // $stages = $this->getDoctrine()->getRepository(Stage::class)->findAll();
-
         // Récupère toutes les scènes
         $stageRepo = $entityManager->getRepository(Stage::class);
         $stages = $stageRepo->findAll();
@@ -221,9 +251,16 @@ class InteractiveMapController extends AbstractController
         $barRepo = $entityManager->getRepository(Bar::class);
         $bars = $barRepo->findAll();
 
+        // Récupère tous les bars
+        $cateringRepo = $entityManager->getRepository(Restauration::class);
+        $caterings = $cateringRepo->findAll();
+
         return $this->render("interactive_map/edit_wc.html.twig", [
             'wcForm' => $wcForm->createView(),
-            'pois' => $stages + $wcs + $bars,
+            'stages' => $stages,
+            'wcs' => $wcs,
+            'bars' => $bars,
+            'caterings' => $caterings,
         ]);
     }
 
@@ -268,35 +305,135 @@ class InteractiveMapController extends AbstractController
         $barRepo = $entityManager->getRepository(Bar::class);
         $bars = $barRepo->findAll();
 
-
-        // Afficher une liste de POI
-        $stages = $this->getDoctrine()->getRepository(Stage::class)->findAll();
-
+        // Récupère tous les bars
+        $cateringRepo = $entityManager->getRepository(Restauration::class);
+        $caterings = $cateringRepo->findAll();
 
         return $this->render("interactive_map/edit_bar.html.twig", [
             'barForm' => $barForm->createView(),
-            'pois' => $stages + $wcs + $bars,
+            'stages' => $stages,
+            'wcs' => $wcs,
+            'bars' => $bars,
+            'caterings' => $caterings,
         ]);
     }
 
+    // EDIT Catering
 
+    /**
+     * @Route("catering/{id}", name="catering_edit")
+     * @param Stage $stage
+     * @param Request $request
+     * @return Response
+     */
+    public function editCatering($id, Request $request, EntityManagerInterface $entityManager)
+    {
 
+        $catering = $entityManager->getRepository(Restauration::class)->find($id);
 
+        $cateringForm = $this->createForm(CateringFormType::class, $catering);
+
+        $cateringForm->handleRequest($request);
+
+        if ($cateringForm->isSubmitted()) {
+            if ($cateringForm->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Point restauration modifié !');
+            } else {
+                $this->addFlash('error', 'Erreur !');
+            }
+        }
+
+        // Récupère toutes les scènes
+        $stageRepo = $entityManager->getRepository(Stage::class);
+        $stages = $stageRepo->findAll();
+
+        // Récupère tous les points WC
+        $wcRepo = $entityManager->getRepository(Wc::class);
+        $wcs = $wcRepo->findAll();
+
+        // Récupère tous les bars
+        $barRepo = $entityManager->getRepository(Bar::class);
+        $bars = $barRepo->findAll();
+
+        // Récupère tous les bars
+        $cateringRepo = $entityManager->getRepository(Restauration::class);
+        $caterings = $cateringRepo->findAll();
+
+        return $this->render("interactive_map/edit_catering.html.twig", [
+            'cateringForm' => $cateringForm->createView(),
+            'stages' => $stages,
+            'wcs' => $wcs,
+            'bars' => $bars,
+            'caterings' => $caterings,
+        ]);
+    }
 
 
     // Supprimer un POI
 
     /**
-     * @Route("/poi/{id}/delete", name="poi_delete")
+     * @Route("/stage/{id}/delete", name="stage_delete")
      * @param Stage $stage
      * @return RedirectResponse
      */
-    public function deletePoi($id, EntityManagerInterface $entityManager)
+    public function deleteStage($id, EntityManagerInterface $entityManager)
     {
 
         $stage = $entityManager->getRepository(Stage::class)->find($id);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($stage);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("interactive_map");
+    }
+
+    /**
+     * @Route("/wc/{id}/delete", name="wc_delete")
+     * @param Wc $wc
+     * @return RedirectResponse
+     */
+    public function deleteWc($id, EntityManagerInterface $entityManager)
+    {
+
+        $wc = $entityManager->getRepository(Wc::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($wc);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("interactive_map");
+    }
+
+    /**
+     * @Route("/bar/{id}/delete", name="bar_delete")
+     * @param Bar $bar
+     * @return RedirectResponse
+     */
+    public function deleteBar($id, EntityManagerInterface $entityManager)
+    {
+
+        $bar = $entityManager->getRepository(Bar::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($bar);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("interactive_map");
+    }
+
+    /**
+     * @Route("/catering/{id}/delete", name="catering_delete")
+     * @param Restauration $catering
+     * @return RedirectResponse
+     */
+    public function deleteCatering($id, EntityManagerInterface $entityManager)
+    {
+
+        $catering = $entityManager->getRepository(Restauration::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($catering);
         $entityManager->flush();
 
         return $this->redirectToRoute("interactive_map");
