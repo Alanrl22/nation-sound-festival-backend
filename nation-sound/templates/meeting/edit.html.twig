@@ -28,8 +28,8 @@
            <p><strong></strong> / {{meeting.day}} / {{meeting.hour}} h</p>
           <img src="{{ asset('images/edit.svg') }}" alt="Editer">
         </a>
-        <a href="{{ path('meeting_delete', {'id': meeting.id}) }}" class="delete"
-          onclick="return confirm('Attention ceci va supprimer l\'artiste selectionné')"><button><img
+        <a href="{{ path('meeting_delete', {'id':meeting.id}) }}" class="delete"
+          onclick="return confirm('Attention ceci va supprimer la rencontre selectionnée')"><button><img
               src="{{asset('images/delete.svg')}}" alt="Supprimer"></button></a>
       </li>
       {% endfor %}

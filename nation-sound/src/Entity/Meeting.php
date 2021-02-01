@@ -41,7 +41,7 @@ class Meeting
     private $day;
 
     /**
-     *@var string
+     *
      * @ORM\OneToMany(targetEntity=Artist::class, mappedBy="meeting")
      */
     private $artist;
@@ -114,7 +114,7 @@ class Meeting
 
     public function addArtist(artist $artist): self
     {
-        if (!$this->artist->contains($artist)) {
+        if (!$this->$artist->contains($artist)) {
             $this->artist[] = $artist;
             $artist->setMeeting($this);
         }
@@ -124,7 +124,7 @@ class Meeting
 
     public function removeArtist(artist $artist): self
     {
-        if ($this->artist->removeElement($artist)) {
+        if ($this->$artist->removeElement($artist)) {
             // set the owning side to null (unless already changed)
             if ($artist->getMeeting() === $this) {
                 $artist->setMeeting(null);
