@@ -87,7 +87,7 @@ class MeetArtistsController extends AbstractController
         ]);
     }
 
-    // Supprimer un Rencontre 
+    // Supprimer une Rencontre 
 
     /**
      * @Route("/meeting/{id}/delete", name="meeting_delete")
