@@ -30,11 +30,6 @@ class Restauration
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $category;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $coordinates;
 
     /**
@@ -46,6 +41,12 @@ class Restauration
      * @ORM\ManyToOne(targetEntity=Festival::class, inversedBy="restaurations")
      */
     private $festival;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=PoiCategory::class, inversedBy="idCatering")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
 
     public function getId(): ?int
     {
@@ -72,18 +73,6 @@ class Restauration
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getCategory(): ?string
-    {
-        return $this->category;
-    }
-
-    public function setCategory(string $category): self
-    {
-        $this->category = $category;
 
         return $this;
     }
@@ -120,6 +109,18 @@ class Restauration
     public function setFestival(?festival $festival): self
     {
         $this->festival = $festival;
+
+        return $this;
+    }
+
+    public function getCategory(): ?PoiCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?PoiCategory $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

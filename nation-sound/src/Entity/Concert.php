@@ -22,7 +22,7 @@ class Concert
     /**
      * @ORM\Column(type="boolean")
      */
-    private $active;
+    private $active = 1;
 
     /**
      * @ORM\ManyToOne(targetEntity=Artist::class, inversedBy="concert")

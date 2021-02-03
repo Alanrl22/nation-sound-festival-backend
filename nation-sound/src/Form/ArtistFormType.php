@@ -35,7 +35,7 @@ class ArtistFormType extends AbstractType
                 ],
             ])
             ->add('image', FileType::class, [
-                'label' => 'Aperçu du produit',
+                'label' => 'Aperçu de l\'image',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -46,7 +46,7 @@ class ArtistFormType extends AbstractType
                             'image/jpeg',
                             'image/png',
                         ],
-                        'mimeTypesMessage' => 'Veuillez upload une image valide',
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide',
                     ])
                 ],
             ])
