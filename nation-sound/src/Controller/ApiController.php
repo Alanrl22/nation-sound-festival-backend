@@ -37,17 +37,21 @@ class ApiController extends AbstractController
 
     private function artistToArray($artists) 
     {
-        $arrayArtists = [];
+        $lineUp = [];
         foreach($artists as $artist) {
-            $arrayArtists[] = [
-                'name' => $artist->getName(),
+            $lineUp[] = [
+                'artist' => $artist->getName(),
                 'description' => $artist->getDescription(),
-                'image' => $artist->getImage(),
+                'img' => $artist->getImage(),
                 'bigArtist' => $artist->isBigArtist(),
-                // 'musicStyle' => $artist->getMusicStyle()->getName(),
+                'type' => $artist->getMusicStyle()->getName(),
+                'image' => $artist->getImage(),
+                // 'stage' => $artist->getConcert()->getStage()->getTitle(),
+                // 'day' => $artist->getConcert()->getDay(),
+                // 'hour' => $artist->getConcert()->getHour(),
             ];
         }
 
-        return $arrayArtists;
+        return $lineUp;
     }
 }
