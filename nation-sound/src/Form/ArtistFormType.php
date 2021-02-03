@@ -35,7 +35,7 @@ class ArtistFormType extends AbstractType
                 ],
             ])
             ->add('image', FileType::class, [
-                'label' => 'Aperçu de l\'image',
+                'label' => 'Image',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [

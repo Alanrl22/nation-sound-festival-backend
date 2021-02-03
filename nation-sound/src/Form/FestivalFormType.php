@@ -61,10 +61,10 @@ class FestivalFormType extends AbstractType
                     'rows' => 10,
                 ],
             ])
-            ->add('artists')
-            ->add('faqs')
-            ->add('contacts')
-            ->add('partners')
+            // ->add('artists')
+            // ->add('faqs')
+            // ->add('contacts')
+            // ->add('partners')
             ->add('Enregistrer', SubmitType::class);
         ;
     }

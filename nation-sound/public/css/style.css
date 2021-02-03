@@ -47,7 +47,6 @@ h2 {
   width: 100%;
 }
 
-
 button[type="submit"],
 .big_btn {
   background: #d0f4de;
@@ -61,6 +60,10 @@ button[type="submit"],
   margin: auto;
   /* min-width: 20rem; */
   padding: 0.6em 4em;
+}
+
+.btn-2 {
+  background: #a9def9;
 }
 
 .small-btn {
@@ -81,7 +84,6 @@ button[type="submit"],
   display: inline;
   margin-left: 1em;
 }
-
 
 /* MENU */
 

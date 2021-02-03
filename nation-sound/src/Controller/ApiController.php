@@ -51,9 +51,6 @@ class ApiController extends AbstractController
                 'bigArtist' => $artist->isBigArtist(),
                 'type' => $artist->getMusicStyle()->getName(),
                 'image' => $artist->getImage(),
-                // 'stage' => $artist->getConcert()->getStage()->getTitle(),
-                'day' => $artist->getConcert()->getDay(),
-                // 'hour' => $artist->getConcert()->getHour(),
             ];
         }
 
@@ -61,7 +58,7 @@ class ApiController extends AbstractController
     }
 
 
-        /**
+    /**
      * @Route("/api/lineup", name="api_lineup")
      */
     public function lineup(EntityManagerInterface $entityManager, Request $request): Response
@@ -78,8 +75,8 @@ class ApiController extends AbstractController
                 'bigArtist' => $concert->getArtist()->isBigArtist(),
                 'type' => $concert->getArtist()->getMusicStyle()->getName(),
                 'stage' => $concert->getStage()->getTitle(),
-                // 'day' => $concert->getConcert()->getDay(),
-                // 'hour' => $concert->getConcert()->getHour(),
+                'day' => $concert->getDay(),
+                'hour' => $concert->getHour(),
             ];
         }
 
