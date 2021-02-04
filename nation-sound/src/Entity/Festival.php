@@ -80,11 +80,6 @@ class Festival
     private $stages;
 
     /**
-     * @ORM\OneToMany(targetEntity=Notifications::class, mappedBy="festival")
-     */
-    private $notifications;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Faq::class, mappedBy="festival")
      */
     private $faqs;
@@ -123,7 +118,6 @@ class Festival
     {
         $this->artists = new ArrayCollection();
         $this->stages = new ArrayCollection();
-        $this->notifications = new ArrayCollection();
         $this->faqs = new ArrayCollection();
         $this->contacts = new ArrayCollection();
         $this->partners = new ArrayCollection();
@@ -308,36 +302,6 @@ class Festival
             // set the owning side to null (unless already changed)
             if ($stage->getFestival() === $this) {
                 $stage->setFestival(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Notifications[]
-     */
-    public function getNotifications(): Collection
-    {
-        return $this->notifications;
-    }
-
-    public function addNotification(Notifications $notification): self
-    {
-        if (!$this->notifications->contains($notification)) {
-            $this->notifications[] = $notification;
-            $notification->setFestival($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNotification(Notifications $notification): self
-    {
-        if ($this->notifications->removeElement($notification)) {
-            // set the owning side to null (unless already changed)
-            if ($notification->getFestival() === $this) {
-                $notification->setFestival(null);
             }
         }
 
