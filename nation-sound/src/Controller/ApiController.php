@@ -7,6 +7,7 @@ use App\Entity\Bar;
 use App\Entity\Concert;
 use App\Entity\Contact;
 use App\Entity\Festival;
+use App\Entity\Notification;
 use App\Entity\Restauration;
 use App\Entity\Stage;
 use App\Entity\Wc;
@@ -213,5 +214,23 @@ class ApiController extends AbstractController
         };
 
         return $this->json($mailArray);
+    }
+
+      /**
+     * @Route("/api/notification", name="api_notification")
+     */
+    public function notification(EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $notifications = $entityManager->getRepository(Notification::class)->findAll();
+
+        $notificationArray = [];
+        foreach ($notifications as $notification) {
+            $notificationArray[] = [
+                'title' => $notification->getTitle(),
+                'description'=> $notification->getDescription()
+            ];
+        };
+
+        return $this->json($notificationArray);
     }
 }
