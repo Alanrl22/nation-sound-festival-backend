@@ -12,7 +12,7 @@ class NotificationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
+            ->add('titre')
             ->add('description')
             ->add('Enregistrer', SubmitType::class);
     }

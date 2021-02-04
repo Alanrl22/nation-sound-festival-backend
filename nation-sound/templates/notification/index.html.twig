@@ -26,7 +26,7 @@
                     <img src="{{ asset('images/edit.svg') }}" alt="Modifier">
                 </a>
                 <a href="{{ path('notification_delete', {'id': notification.id}) }}" class="delete"
-                    onclick="return confirm('Attention ceci va supprimer l\'artist selectionné')"><button><img
+                    onclick="return confirm('Attention ceci va supprimer la notification selectionnée')"><button><img
                             src="{{asset('images/delete.svg')}}" alt="Supprimer"></button></a>
             </li>
             {% endfor %}
