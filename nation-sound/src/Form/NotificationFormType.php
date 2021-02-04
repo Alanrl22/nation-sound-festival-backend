@@ -13,7 +13,7 @@ class NotificationFormType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('Enregistrer', SubmitType::class)
+            ->add('Enregistrer', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
