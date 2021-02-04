@@ -3,19 +3,20 @@
 {% block title %}Liste des utilisateurs{% endblock %}
 
 {% block body %}
+<div class="container users">
     <h1>Liste des utilisateurs</h1>
     <table>
         <thead>
-            <th>ID</th>
+            {# <th>ID</th> #}
             <th>Email</th>
-            <th>Rôles</th>
+            <th>Rôle</th>
             <th>Actions</th>
         </thead>
         <tbody>
             {# On boucle sur les utilisateurs #}
             {% for user in users %}
                 <tr>
-                    <td>{{ user.id }}</td>
+                    {# <td>{{ user.id }}</td> #}
                     <td>{{ user.email }}</td>
                     <td>
                         {# On boucle sur les rôles #}
@@ -35,4 +36,5 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
 {% endblock %}
