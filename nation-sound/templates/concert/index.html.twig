@@ -21,11 +21,11 @@
         <ul>
             {% for concert in concerts %}
             <li>
-                <a href="{{ path('artist_edit', {'id':concert.id}) }}">
+                <a href="{{ path('concert_edit', {'id':concert.id}) }}">
                     <p><strong>{{ concert.artist }}</strong> {{ concert.day}} / {{concert.hour}}h</p>
                     <img src="{{ asset('images/edit.svg') }}" alt="Modifier">
                 </a>
-                <a href="{{ path('artist_delete', {'id': concert.id}) }}" class="delete"
+                <a href="{{ path('concert_delete', {'id': concert.id}) }}" class="delete"
                     onclick="return confirm('Attention ceci va supprimer l\'artist selectionné')"><button><img
                             src="{{asset('images/delete.svg')}}" alt="Supprimer"></button></a>
             </li>
