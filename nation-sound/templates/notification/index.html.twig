@@ -22,7 +22,7 @@
             {% for notification in notifications %}
             <li>
                 <a href="{{ path('notification_edit', {'id':notification.id}) }}">
-                    <p><strong>{{ notification.artist }}</strong> {{ notification.day}} / {{notification.hour}}h</p>
+                    <p><strong>{{ notification.title }}</strong></p>
                     <img src="{{ asset('images/edit.svg') }}" alt="Modifier">
                 </a>
                 <a href="{{ path('notification_delete', {'id': notification.id}) }}" class="delete"
