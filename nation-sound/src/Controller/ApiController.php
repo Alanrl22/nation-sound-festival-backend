@@ -180,4 +180,38 @@ class ApiController extends AbstractController
 
         return $this->json($gInfosArray);
     }
+
+    /**
+     * @Route("/api/practical-informations", name="api_practicalInformations")
+     */
+    public function practicalInformations(EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $festivals = $entityManager->getRepository(Festival::class)->findAll();
+
+        $pInfosArray = [];
+        foreach ($festivals as $festival) {
+            $pInfosArray[] = [
+                'practicalInformations' => $festival->getPraticalInformations(),
+            ];
+        };
+
+        return $this->json($pInfosArray);
+    }
+
+    /**
+     * @Route("/api/mail", name="api_mail")
+     */
+    public function mail(EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $festivals = $entityManager->getRepository(Festival::class)->findAll();
+
+        $mailArray = [];
+        foreach ($festivals as $festival) {
+            $mailArray[] = [
+                'mail' => $festival->getContactMail(),
+            ];
+        };
+
+        return $this->json($mailArray);
+    }
 }

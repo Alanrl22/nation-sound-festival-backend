@@ -34,22 +34,25 @@ class ArtistFormType extends AbstractType
                     'rows' => 10,
                 ],
             ])
-            ->add('image', FileType::class, [
-                'label' => 'Image',
-                'mapped' => false,
-                'required' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/jpg',
-                            'image/jpeg',
-                            'image/png',
-                        ],
-                        'mimeTypesMessage' => 'Veuillez télécharger une image valide',
-                    ])
-                ],
+            ->add('image', TextType::class,     [
+                'label' => 'Lien de l\'image'
             ])
+            // ->add('image', FileType::class, [
+            //     'label' => 'Image',
+            //     'mapped' => false,
+            //     'required' => false,
+            //     'constraints' => [
+            //         new File([
+            //             'maxSize' => '1024k',
+            //             'mimeTypes' => [
+            //                 'image/jpg',
+            //                 'image/jpeg',
+            //                 'image/png',
+            //             ],
+            //             'mimeTypesMessage' => 'Veuillez télécharger une image valide',
+            //         ])
+            //     ],
+            // ])
             ->add('bigArtist', CheckboxType::class,     [
                 'label' => 'Tête d\'affiche ?',
                 'required' => false,
