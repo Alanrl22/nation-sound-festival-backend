@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ConcertController!{% endblock %}
+{% block title %}Créer un concert{% endblock %}
 
 {% block body %}
 <div class="container artist">
@@ -21,8 +21,13 @@
         <ul>
             {% for concert in concerts %}
             <li>
+<<<<<<< HEAD
                 <a href="{{ path('concert_edit', {'id':concert.id}) }}">
                     <p><strong>{{ concert.artist }}</strong> {{ concert.day}} / {{concert.hour}}h</p>
+=======
+                <a href="{{ path('artist_edit', {'id':concert.id}) }}">
+                    <p><strong>{{ concert.artist }}</strong> - {{ concert.day}} / {{concert.hour}}h / {{concert.stage}}</p>
+>>>>>>> 044e67e44d96f360c2866c69ef958f3fee0a6f96
                     <img src="{{ asset('images/edit.svg') }}" alt="Modifier">
                 </a>
                 <a href="{{ path('concert_delete', {'id': concert.id}) }}" class="delete"
