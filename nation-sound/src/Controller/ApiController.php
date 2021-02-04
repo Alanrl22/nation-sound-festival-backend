@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Artist;
 use App\Entity\Bar;
 use App\Entity\Concert;
+use App\Entity\Contact;
 use App\Entity\Festival;
 use App\Entity\Restauration;
 use App\Entity\Stage;
@@ -138,8 +139,29 @@ class ApiController extends AbstractController
             ];
         }
 
-        // Renvoie le tableau dans un json
         return $this->json($map);
+    }
+
+    /**
+     * @Route("/api/contacts", name="api_contacts")
+     */
+    public function contact(EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $contacts = $entityManager->getRepository(Contact::class)->findAll();
+
+        $contactArray = [];
+        foreach ($contacts as $contact) {
+            $contactArray[] = [
+                'name' => $contact->getName(),
+                'picture' => $contact->getPicture(),
+                'job' => $contact->getJob(),
+                'description' => $contact->getDescription(),
+                'festival' => $contact->getFestival(),
+
+            ];
+        }
+
+        return $this->json($contactArray);
     }
 
     /**
@@ -147,7 +169,6 @@ class ApiController extends AbstractController
      */
     public function globalInformations(EntityManagerInterface $entityManager, Request $request): Response
     {
-        // Récupérer la liste de tous les artistes
         $festivals = $entityManager->getRepository(Festival::class)->findAll();
 
         $gInfosArray = [];
@@ -157,7 +178,6 @@ class ApiController extends AbstractController
             ];
         };
 
-        // Renvoie le tableau dans un json
         return $this->json($gInfosArray);
     }
 }
