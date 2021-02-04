@@ -58,7 +58,6 @@
     },
     "scripts": {
         "compile": [
-            "php bin/console doctrine:database:drop --force",
             "php bin/console doctrine:database:create --if-not-exists",
             "php bin/console doctrine:migrations:migrate -n"  
         ],
