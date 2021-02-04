@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210202180058 extends AbstractMigration
+final class Version20210204110101 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -35,9 +35,9 @@ final class Version20210202180058 extends AbstractMigration
         $this->addSql('CREATE TABLE partners (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, logo VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE partners_festival (partners_id INT NOT NULL, festival_id INT NOT NULL, INDEX IDX_550ACAA3BDE7F1C6 (partners_id), INDEX IDX_550ACAA38AEBAF57 (festival_id), PRIMARY KEY(partners_id, festival_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE poi_category (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE restauration (id INT AUTO_INCREMENT NOT NULL, festival_id INT DEFAULT NULL, title VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, category VARCHAR(255) NOT NULL, coordinates VARCHAR(255) NOT NULL, company VARCHAR(255) NOT NULL, INDEX IDX_898B1EF18AEBAF57 (festival_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE restauration (id INT AUTO_INCREMENT NOT NULL, festival_id INT DEFAULT NULL, category_id INT NOT NULL, title VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, coordinates VARCHAR(255) NOT NULL, company VARCHAR(255) NOT NULL, INDEX IDX_898B1EF18AEBAF57 (festival_id), INDEX IDX_898B1EF112469DE2 (category_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE stage (id INT AUTO_INCREMENT NOT NULL, festival_id INT DEFAULT NULL, category_id INT NOT NULL, title VARCHAR(255) NOT NULL, coordinates VARCHAR(255) NOT NULL, INDEX IDX_C27C93698AEBAF57 (festival_id), INDEX IDX_C27C936912469DE2 (category_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', password VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE wc (id INT AUTO_INCREMENT NOT NULL, festival_id INT DEFAULT NULL, category_id INT NOT NULL, title VARCHAR(255) NOT NULL, number INT DEFAULT NULL, coordinates VARCHAR(255) NOT NULL, gender VARCHAR(255) DEFAULT NULL, company VARCHAR(255) DEFAULT NULL, INDEX IDX_F51CCD2C8AEBAF57 (festival_id), INDEX IDX_F51CCD2C12469DE2 (category_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE artist ADD CONSTRAINT FK_159968767433D9C FOREIGN KEY (meeting_id) REFERENCES meeting (id)');
         $this->addSql('ALTER TABLE artist ADD CONSTRAINT FK_15996877DDE3C52 FOREIGN KEY (music_style_id) REFERENCES music_style (id)');
@@ -55,6 +55,7 @@ final class Version20210202180058 extends AbstractMigration
         $this->addSql('ALTER TABLE partners_festival ADD CONSTRAINT FK_550ACAA3BDE7F1C6 FOREIGN KEY (partners_id) REFERENCES partners (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE partners_festival ADD CONSTRAINT FK_550ACAA38AEBAF57 FOREIGN KEY (festival_id) REFERENCES festival (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE restauration ADD CONSTRAINT FK_898B1EF18AEBAF57 FOREIGN KEY (festival_id) REFERENCES festival (id)');
+        $this->addSql('ALTER TABLE restauration ADD CONSTRAINT FK_898B1EF112469DE2 FOREIGN KEY (category_id) REFERENCES poi_category (id)');
         $this->addSql('ALTER TABLE stage ADD CONSTRAINT FK_C27C93698AEBAF57 FOREIGN KEY (festival_id) REFERENCES festival (id)');
         $this->addSql('ALTER TABLE stage ADD CONSTRAINT FK_C27C936912469DE2 FOREIGN KEY (category_id) REFERENCES poi_category (id)');
         $this->addSql('ALTER TABLE wc ADD CONSTRAINT FK_F51CCD2C8AEBAF57 FOREIGN KEY (festival_id) REFERENCES festival (id)');
@@ -81,6 +82,7 @@ final class Version20210202180058 extends AbstractMigration
         $this->addSql('ALTER TABLE artist DROP FOREIGN KEY FK_15996877DDE3C52');
         $this->addSql('ALTER TABLE partners_festival DROP FOREIGN KEY FK_550ACAA3BDE7F1C6');
         $this->addSql('ALTER TABLE bar DROP FOREIGN KEY FK_76FF8CAA12469DE2');
+        $this->addSql('ALTER TABLE restauration DROP FOREIGN KEY FK_898B1EF112469DE2');
         $this->addSql('ALTER TABLE stage DROP FOREIGN KEY FK_C27C936912469DE2');
         $this->addSql('ALTER TABLE wc DROP FOREIGN KEY FK_F51CCD2C12469DE2');
         $this->addSql('ALTER TABLE concert DROP FOREIGN KEY FK_D57C02D22298D193');

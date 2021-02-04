@@ -6,6 +6,7 @@ use App\Entity\Artist;
 use App\Entity\Bar;
 use App\Entity\Concert;
 use App\Entity\Contact;
+use App\Entity\Festival;
 use App\Entity\Restauration;
 use App\Entity\Stage;
 use App\Entity\Wc;
@@ -21,7 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ApiController extends AbstractController
 {
     /**
-     * @Route("/api/artist", name="api_artist")
+     * @Route("/api/artists", name="api_artists")
      */
     public function index(EntityManagerInterface $entityManager, Request $request): Response
     {
@@ -138,15 +139,14 @@ class ApiController extends AbstractController
             ];
         }
 
-        // Renvoie le tableau dans un json
         return $this->json($map);
     }
-        /**
-     * @Route("/api/contact", name="api_contact")
+
+    /**
+     * @Route("/api/contacts", name="api_contacts")
      */
     public function contact(EntityManagerInterface $entityManager, Request $request): Response
     {
-        // Récupérer la liste de tous les artistes
         $contacts = $entityManager->getRepository(Contact::class)->findAll();
 
         $contactArray = [];
@@ -157,12 +157,27 @@ class ApiController extends AbstractController
                 'job' => $contact->getJob(),
                 'description' => $contact->getDescription(),
                 'festival' => $contact->getFestival(),
-                
+
             ];
         }
 
-
-        // Renvoie le tableau dans un json
         return $this->json($contactArray);
+    }
+
+    /**
+     * @Route("/api/global-informations", name="api_globalInformation")
+     */
+    public function globalInformations(EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $festivals = $entityManager->getRepository(Festival::class)->findAll();
+
+        $gInfosArray = [];
+        foreach ($festivals as $festival) {
+            $gInfosArray[] = [
+                'globalInformations' => $festival->getGlobalInformations(),
+            ];
+        };
+
+        return $this->json($gInfosArray);
     }
 }

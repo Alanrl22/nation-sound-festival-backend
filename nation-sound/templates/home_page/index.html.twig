@@ -11,12 +11,12 @@
     <a href="{{ path('festival') }}"><button class="big_btn menu-btn" type="button"> Créer un festival</button></a>
     <a href="{{ path('artist') }}"><button class="big_btn menu-btn" type="button"> Créer un artiste</button></a>
     <a href="{{ path('concert') }}"><button class="big_btn menu-btn" type="button"> Programmer un concert</button></a>
-    <a href="{{ path('meeting') }}"><button class="big_btn menu-btn" type="button"> Rencontre avec un artiste</button></a>
+    <a href="{{ path('meeting') }}"><button class="big_btn menu-btn" type="button"> Rencontrer un artiste</button></a>
     <a href="{{ path('interactive_map') }}"><button class="big_btn menu-btn" type="button"> Créer un point d'intérêt</button></a>
-    <a href="{{ path('contact') }}"><button class="big_btn menu-btn" type="button"> Créer un contact</button></a>
-     <a href="{{ path('general_informations_actuality') }}"><button class="big_btn menu-btn" type="button"> Informations Pratiques et FAQ</button></a>
-     <a href="{{ path('legal_notice') }}"><button class="big_btn menu-btn" type="button"> Mentions Légales </button></a>
-     <a href="/admin/"><button class="big_btn menu-btn" type="button"> Admin</button></a>
+    <a href="{{ path('contact') }}"><button class="big_btn menu-btn" type="button"> Créer un organisateur</button></a>
+     <a href="{{ path('general_informations_actuality') }}"><button class="big_btn menu-btn" type="button">F.A.Q.</button></a>
+     <a href="{{ path('legal_notice') }}"><button class="big_btn menu-btn" type="button">Mentions Légales</button></a>
+     <a href="/admin/"><button class="big_btn menu-btn btn-2" type="button">Espace administrateur</button></a>
 {% endif %}
     {% if is_granted('ROLE_ORGANISATEUR') %}
     <a href="{{ path('artist') }}"><button class="big_btn menu-btn" type="button"> Créer un artiste</button></a>

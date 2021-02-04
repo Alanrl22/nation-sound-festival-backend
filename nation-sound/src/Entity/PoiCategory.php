@@ -25,25 +25,31 @@ class PoiCategory
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Stage::class, mappedBy="category", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Stage::class, mappedBy="category", orphanRemoval=false)
      */
     private $idStage;
 
     /**
-     * @ORM\OneToMany(targetEntity=Wc::class, mappedBy="category", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Wc::class, mappedBy="category", orphanRemoval=false)
      */
     private $idWc;
 
     /**
-     * @ORM\OneToMany(targetEntity=Bar::class, mappedBy="category", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Bar::class, mappedBy="category", orphanRemoval=false)
      */
     private $idBar;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Restauration::class, mappedBy="category", orphanRemoval=false)
+     */
+    private $idCatering;
 
     public function __construct()
     {
         $this->idStage = new ArrayCollection();
         $this->idWc = new ArrayCollection();
         $this->idBar = new ArrayCollection();
+        $this->idCatering = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -152,6 +158,36 @@ class PoiCategory
             // set the owning side to null (unless already changed)
             if ($idBar->getCategory() === $this) {
                 $idBar->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Restauration[]
+     */
+    public function getIdCatering(): Collection
+    {
+        return $this->idCatering;
+    }
+
+    public function addIdCatering(Restauration $idCatering): self
+    {
+        if (!$this->idCatering->contains($idCatering)) {
+            $this->idCatering[] = $idCatering;
+            $idCatering->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdCatering(Restauration $idCatering): self
+    {
+        if ($this->idCatering->removeElement($idCatering)) {
+            // set the owning side to null (unless already changed)
+            if ($idCatering->getCategory() === $this) {
+                $idCatering->setCategory(null);
             }
         }
 

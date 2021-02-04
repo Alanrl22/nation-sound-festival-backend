@@ -16,26 +16,31 @@ class EditUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('email', EmailType::class,[
-            'constraints' => [
-                new NotBlank([
-                    'message' => 'Merci d\'entrer un e-mail',
-                ]),
-            ],
-            'required' => true,
-            'attr' => ['class' =>'form-control'],
-        ])
-        ->add('roles', ChoiceType::class, [
-            'choices' => [
-                'Organisateur' => 'ROLE_ORGANISATEUR',
-                'Administrateur' => 'ROLE_ADMIN'
-            ],
-            'expanded' => true,
-            'multiple' => true,
-            'label' => 'Rôles' 
-        ])
-        ->add('valider', SubmitType::class)
-        ;
+            ->add('email', EmailType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci d\'entrer un e-mail',
+                    ]),
+                ],
+                'required' => true,
+                'attr' => ['class' => 'form-control'],
+            ])
+            ->add('roles', ChoiceType::class, [
+                'choices' => [
+                    'Organisateur' => 'ROLE_ORGANISATEUR',
+                    'Administrateur' => 'ROLE_ADMIN'
+                ],
+                'label_attr' => [
+                    'class' => 'inline',
+                ],
+                'attr' => [
+                    'class' => 'inline',
+                ],
+                'expanded' => true,
+                'multiple' => true,
+                'label' => 'Rôles'
+            ])
+            ->add('valider', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
