@@ -165,7 +165,7 @@ class ApiController extends AbstractController
     }
 
     /**
-     * @Route("/api/global-informations", name="api_globalInformation")
+     * @Route("/api/global-informations", name="api_globalInformations")
      */
     public function globalInformations(EntityManagerInterface $entityManager, Request $request): Response
     {
