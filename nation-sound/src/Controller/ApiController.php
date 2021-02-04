@@ -165,7 +165,7 @@ class ApiController extends AbstractController
     }
 
     /**
-     * @Route("/api/global-informations", name="api_globalInformation")
+     * @Route("/api/global-informations", name="api_globalInformations")
      */
     public function globalInformations(EntityManagerInterface $entityManager, Request $request): Response
     {
@@ -175,6 +175,23 @@ class ApiController extends AbstractController
         foreach ($festivals as $festival) {
             $gInfosArray[] = [
                 'globalInformations' => $festival->getGlobalInformations(),
+            ];
+        };
+
+        return $this->json($gInfosArray);
+    }
+
+    /**
+     * @Route("/api/practical-informations", name="api_practicalInformations")
+     */
+    public function practicalInformations(EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $festivals = $entityManager->getRepository(Festival::class)->findAll();
+
+        $gInfosArray = [];
+        foreach ($festivals as $festival) {
+            $gInfosArray[] = [
+                'practicalInformations' => $festival->getPraticalInformations(),
             ];
         };
 
