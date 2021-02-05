@@ -7,6 +7,7 @@ use App\Entity\Bar;
 use App\Entity\Concert;
 use App\Entity\Contact;
 use App\Entity\Festival;
+use App\Entity\MusicStyle;
 use App\Entity\Notification;
 use App\Entity\Restauration;
 use App\Entity\Stage;
@@ -166,6 +167,40 @@ class ApiController extends AbstractController
     }
 
     /**
+     * @Route("/api/stages", name="api_stages")
+     */
+    public function stages(EntityManagerInterface $entityManager): Response
+    {
+        $stages = $entityManager->getRepository(Stage::class)->findAll();
+
+        $array = [];
+        foreach ($stages as $stage) {
+            $array[] = [
+                'stages' => $stage->getTitle(),
+            ];
+        };
+
+        return $this->json($array);
+    }
+
+    /**
+     * @Route("/api/musicstyles", name="api_musicstyles")
+     */
+    public function musicStyles(EntityManagerInterface $entityManager): Response
+    {
+        $musicstyles = $entityManager->getRepository(MusicStyle::class)->findAll();
+
+        $array = [];
+        foreach ($musicstyles as $musicstyle) {
+            $array[] = [
+                'type' => $musicstyle->getName(),
+            ];
+        };
+
+        return $this->json($array);
+    }
+
+    /**
      * @Route("/api/global-informations", name="api_globalInformations")
      */
     public function globalInformations(EntityManagerInterface $entityManager, Request $request): Response
@@ -216,7 +251,7 @@ class ApiController extends AbstractController
         return $this->json($mailArray);
     }
 
-      /**
+    /**
      * @Route("/api/notification", name="api_notification")
      */
     public function notification(EntityManagerInterface $entityManager, Request $request): Response
@@ -227,7 +262,7 @@ class ApiController extends AbstractController
         foreach ($notifications as $notification) {
             $notificationArray[] = [
                 'title' => $notification->getTitle(),
-                'description'=> $notification->getDescription()
+                'description' => $notification->getDescription()
             ];
         };
 

@@ -25,7 +25,7 @@ class MusicStyle
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=artist::class, mappedBy="musicStyle")
+     * @ORM\OneToMany(targetEntity=Artist::class, mappedBy="musicStyle")
      */
     private $artist;
 
