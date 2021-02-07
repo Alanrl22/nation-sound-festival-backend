@@ -175,11 +175,10 @@ class ApiController extends AbstractController
 
         $array = [];
         foreach ($stages as $stage) {
-            $array[] = [
-                'stages' => $stage->getTitle(),
-            ];
+            $array[] = $stage->getTitle();
         };
 
+        // return $this->json($array);
         return $this->json($array);
     }
 
@@ -192,9 +191,7 @@ class ApiController extends AbstractController
 
         $array = [];
         foreach ($musicstyles as $musicstyle) {
-            $array[] = [
-                'type' => $musicstyle->getName(),
-            ];
+            $array[] = $musicstyle->getName();
         };
 
         return $this->json($array);
