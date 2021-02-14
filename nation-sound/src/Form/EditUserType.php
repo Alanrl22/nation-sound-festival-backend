@@ -30,12 +30,6 @@ class EditUserType extends AbstractType
                     'Organisateur' => 'ROLE_ORGANISATEUR',
                     'Administrateur' => 'ROLE_ADMIN'
                 ],
-                'label_attr' => [
-                    'class' => 'inline',
-                ],
-                'attr' => [
-                    'class' => 'inline',
-                ],
                 'expanded' => true,
                 'multiple' => true,
                 'label' => 'Rôles'

@@ -4,28 +4,33 @@
 
 {% block body %}
 
-<div class="menu">
+<div class="container menu">
+
+    <h1>Accueil</h1>
     
-{% if is_granted('ROLE_ADMIN') %}
-    {# Ici le contenu réservé aux utilisateurs connectés #}
-    <a href="{{ path('festival') }}"><button class="big_btn menu-btn" type="button"> Créer un festival</button></a>
-    <a href="{{ path('artist') }}"><button class="big_btn menu-btn" type="button"> Créer un artiste</button></a>
-    <a href="{{ path('concert') }}"><button class="big_btn menu-btn" type="button"> Programmer un concert</button></a>
-    <a href="{{ path('meeting') }}"><button class="big_btn menu-btn" type="button"> Rencontrer un artiste</button></a>
-    <a href="{{ path('interactive_map') }}"><button class="big_btn menu-btn" type="button"> Créer un point d'intérêt</button></a>
-    <a href="{{ path('contact') }}"><button class="big_btn menu-btn" type="button"> Créer un organisateur</button></a>
-     <a href="{{ path('general_informations_actuality') }}"><button class="big_btn menu-btn" type="button">F.A.Q.</button></a>
-     <a href="{{ path('legal_notice') }}"><button class="big_btn menu-btn" type="button">Mentions Légales</button></a>
-     <a href="{{ path('notification') }}"><button class="big_btn menu-btn" type="button"> Notification </button></a>
-     <a href="/admin/"><button class="big_btn menu-btn btn-2" type="button">Espace administrateur</button></a>
+{% if is_granted('ROLE_ORGANISATEUR') or is_granted('ROLE_ADMIN') %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+
+        <a href="/admin/utilisateurs"><button class="big_btn menu-btn btn-2" type="button">Espace administrateur{% if newUsers %}<div id="demands">{{newUsers}}</div>{% endif %}</button></a>
+    
+    {% endif %}
+
+    <a href="{{ path('festival') }}"><button class="big_btn menu-btn" type="button">Créer un nouveau festival</button></a>
+    <a href="{{ path('artist') }}"><button class="big_btn menu-btn" type="button">Créer un artiste</button></a>
+    <a href="{{ path('concert') }}"><button class="big_btn menu-btn" type="button">Programmer un concert</button></a>
+    <a href="{{ path('meeting') }}"><button class="big_btn menu-btn" type="button">Rencontrer un artiste</button></a>
+    <a href="{{ path('interactive_map') }}"><button class="big_btn menu-btn" type="button">Créer un point d'intérêt</button></a>
+    <a href="{{ path('contact') }}"><button class="big_btn menu-btn" type="button">Créer une fiche organisateur</button></a>
+    <a href="{{ path('general_informations_actuality') }}"><button class="big_btn menu-btn" type="button">Compléter la F.A.Q.</button></a>
+    <a href="{{ path('legal_notice') }}"><button class="big_btn menu-btn" type="button">Mentions Légales</button></a>
+    <a href="{{ path('notification') }}"><button class="big_btn menu-btn" type="button"> Créer une notification </button></a>
+
+{% else %}
+
+    <p style="text-align: center">Hey ! Bienvenue à toi nouvel organisateur, nous avons bien enregistré ta demande. Tu pourras bientôt gérer le festival avec la Team !</p>
+
 {% endif %}
-    {% if is_granted('ROLE_ORGANISATEUR') %}
-    <a href="{{ path('artist') }}"><button class="big_btn menu-btn" type="button"> Créer un artiste</button></a>
-    <a href="{{ path('concert') }}"><button class="big_btn menu-btn" type="button"> Programmer un concert</button></a>
-    <a href="{{ path('meeting') }}"><button class="big_btn menu-btn" type="button"> Rencontre avec un artiste</button></a>
-    <a href="{{ path('partners') }}"><button class="big_btn menu-btn" type="button"> Les Partenaires </button></a>
-    {% else %}
-   {% endif %}
     
 </div>
 {% endblock %}

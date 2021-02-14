@@ -60,6 +60,7 @@ button[type="submit"],
   margin: auto;
   /* min-width: 20rem; */
   padding: 0.6em 4em;
+  position: relative;
 }
 
 .btn-2 {
@@ -113,6 +114,16 @@ button[type="submit"],
 .register-link {
   font-size: 0.8em;
   text-align: center;
+}
+
+#demands {
+  background: #ff6a00;
+  border: 1px solid black;
+  border-radius: 2em;
+  padding: 0.2em 0.5em;
+  position: absolute;
+  right: 8px;
+  top: -0.5em;
 }
 
 /* FORMULAIRES */
@@ -250,4 +261,33 @@ a.newPoi {
 
 .list p {
   margin: 0.4em 0;
+}
+
+/* PAGE Modification Users */
+#edit_user_roles {
+  display: flex;
+  padding: 0.5em 0;
+  max-width: 350px;
+}
+
+#edit_user_roles label {
+  font-weight: normal;
+}
+
+#edit_user_roles input[type="checkbox"] {
+  margin-left: 0;
+  margin-right: 0.8em;
+}
+
+.users table {
+  min-width: 90%;
+}
+
+.users table tbody tr td:not(:first-child) {
+  text-align: center;
+}
+
+.users table thead tr th {
+  border-bottom: 1px solid #a9def9;
+  padding-bottom: 1em;
 }
