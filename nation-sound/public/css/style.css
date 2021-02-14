@@ -173,6 +173,14 @@ form div ul li {
   text-align: right;
 }
 
+.captcha {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin: 2em auto auto;
+  max-width: 20em;
+}
+
 a.newPoi {
   text-decoration: none;
   margin: 1.5em 0 -1.5em auto;

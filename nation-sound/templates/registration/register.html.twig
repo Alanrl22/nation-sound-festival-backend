@@ -37,11 +37,18 @@
     }}
     <div>
       <label class="checkbox" for="{{ registrationForm.agreeTerms.vars.id }}">
-        J'accepte les <a href="https://fr.wikipedia.org/wiki/Conditions_g%C3%A9n%C3%A9rales_d%27utilisation" target="_blank">conditions d'utilisation</a>
+        J'accepte les <a href="https://fr.wikipedia.org/wiki/Conditions_g%C3%A9n%C3%A9rales_d%27utilisation"
+          target="_blank">
+          conditions d'utilisation
+        </a>
         {{ form_widget(registrationForm.agreeTerms) }}
       </label>
     </div>
-
+    <div class="captcha">
+      {{ form_errors(registrationForm.captcha) }}
+      {{ form_label(registrationForm.captcha) }}
+      {{ form_widget(registrationForm.captcha) }}
+    </div>
     <button type="submit">Inscription</button>
     {{ form_end(registrationForm) }}
   </div>
