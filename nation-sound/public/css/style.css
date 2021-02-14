@@ -158,12 +158,13 @@ input[type="checkbox"] {
   margin-left: 1.5em;
 }
 
-#poi_form div ul {
+/* Messages d'erreurs des formulaires */
+form div ul {
   margin: 0;
   padding: 0;
 }
 
-#poi_form div ul li {
+form div ul li {
   color: rgb(218, 17, 17);
   font-size: 0.8em;
   font-style: italic;
