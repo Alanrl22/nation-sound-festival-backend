@@ -21,17 +21,24 @@ class HomePageController extends AbstractController
 
         $newUsers = $entityManager->getRepository(User::class)->findByRoles([]);
 
-        $emptyRoles = [];
+        $roles = [];
         foreach ($newUsers as $newUser) {
-            $emptyRoles[] = count($newUser->getRoles());
+            $roles[] = count($newUser->getRoles());
         };
 
-        $counts = array_count_values($emptyRoles);
+        // Renvoie un tableau clef => valeur des rôles et le nb d'users qui ont ce rôle
+        $counts = array_count_values($roles);
 
+        // Si le rôle 1 (= Rôle USER uniquement) existe, soit s'il y a des nouveaux utilisateurs, alors retourner le nb, sinon retouner zéro
+        if (array_key_exists(1, $counts)) {
+            $countNewUsers = $counts[1];
+        } else {
+            $countNewUsers = 0;
+        }
 
         return $this->render('home_page/index.html.twig', [
             'controller_name' => 'HomePageController',
-            'newUsers' => $counts[1]
+            'newUsers' => $countNewUsers
         ]);
     }
 }
