@@ -36,22 +36,22 @@ class ArtistController extends AbstractController
                 $em = $this->getDoctrine()->getManager();
 
 
-                $fichier = $artistForm->get('image')->getData();
-            if($fichier){
-                $nomFichier = uniqid() .'.'. $fichier->guessExtension();
+            //     $fichier = $artistForm->get('image')->getData();
+            // if($fichier){
+            //     $nomFichier = uniqid() .'.'. $fichier->guessExtension();
 
-                try{
-                    $fichier->move(
-                        $this->getParameter('images_dir'),
-                        $nomFichier
-                    );
-                }
-                catch(FileException $e){
-                    return $this->redirectToRoute('artist');
-                }
+            //     try{
+            //         $fichier->move(
+            //             $this->getParameter('images_dir'),
+            //             $nomFichier
+            //         );
+            //     }
+            //     catch(FileException $e){
+            //         return $this->redirectToRoute('artist');
+            //     }
 
-                $artist->setImage($nomFichier);
-            }
+            //     $artist->setImage($nomFichier);
+            // }
             
 
                 $em->persist($artist);
