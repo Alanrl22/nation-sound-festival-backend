@@ -31,7 +31,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-            if ($user->getEmail() == "alan.raoul22+ADMIN@gmail.com" || $user->getEmail() == "adresse@mail.fr"){
+            if ($user->getEmail() == "alan.raoul22+ADMIN@gmail.com" || $user->getEmail() == "address@mail.fr"){
                 $user->setRoles(["ROLE_ADMIN"]); 
             }
             $entityManager = $this->getDoctrine()->getManager();
